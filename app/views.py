@@ -8,23 +8,27 @@ def main(request):
     return render(
         request,
         'main.html',
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4a11cbcf5cc58b7ae73819bf6eb386bcb488cb36
     )
 
-def join():
+def join(request):
     return
 
-def login():
+def login(request):
     return
 
-def list():
+def list(request):
     return
 
-def mypage():
+def mypage(request):
     return
 
-def myfriends():
+def myfriends(request):
     return
 
-def message():
+def message(request):
+
     return
