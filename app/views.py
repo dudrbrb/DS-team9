@@ -26,4 +26,5 @@ def myfriends(request):
     return
 
 def message(request):
+
     return
