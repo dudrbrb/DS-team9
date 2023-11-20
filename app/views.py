@@ -7,24 +7,24 @@ from .models import Major1, Major2, Tag, Member
 def main(request):
     return render(
         request,
-        '/main.html',
-
+        'main.html',
     )
 
-def join():
+def join(request):
     return
 
-def login():
+def login(request):
     return
 
-def list():
+def list(request):
     return
 
-def mypage():
+def mypage(request):
     return
 
-def myfriends():
+def myfriends(request):
     return
 
-def message():
+def message(request):
+
     return
