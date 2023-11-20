@@ -7,7 +7,7 @@ from .models import Major1, Major2, Tag, Member
 def main(request):
     return render(
         request,
-        '/main.html',
+        'main.html',
 
     )
 
