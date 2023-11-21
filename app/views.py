@@ -8,23 +8,36 @@ def main(request):
     return render(
         request,
         'main.html',
-
     )
 
-def join():
-    return
+def join(request):
+    return render(
+        request,
+        'join.html',
+    )
 
-def login():
-    return
+def login(request):
+    return render(
+        request,
+        'login.html',
+    )
 
-def list():
-    return
+def list(request):
+    return render(
+        request,
+        'list.html',
+    )
 
-def mypage():
-    return
+def mypage(request):
+    return render(
+        request,
+        'mypage.html',
+    )
 
-def myfriends():
-    return
+def myfriends(request):
+    return render(
+        request,
+        'friend.html',
+    )
 
-def message():
-    return
+
