@@ -37,7 +37,7 @@ def mypage(request):
 def myfriends(request):
     return render(
         request,
-        'friend.html',
+            'friend.html',
     )
 
 
