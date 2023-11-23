@@ -11,20 +11,33 @@ def main(request):
     )
 
 def join(request):
-    return
+    return render(
+        request,
+        'join.html',
+    )
 
 def login(request):
-    return
+    return render(
+        request,
+        'login.html',
+    )
 
 def list(request):
-    return
+    return render(
+        request,
+        'list.html',
+    )
 
 def mypage(request):
-    return
+    return render(
+        request,
+        'mypage.html',
+    )
 
 def myfriends(request):
-    return
+    return render(
+        request,
+        'friend.html',
+    )
 
-def message(request):
 
-    return
