@@ -43,10 +43,6 @@ button.pink{
     background-color: #FF176A;
 }
 
-.full{
-    width: 100%;
-}
-
 .center{
     display: flex;
     justify-content: center;

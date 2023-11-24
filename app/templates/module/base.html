@@ -2,30 +2,31 @@
 {% load static %}
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" 
-    content="width=device-width, initial-scale=1.0">
-
     <title>DUKONNECT</title>
 
     <!-- css load -->
+    <script src="https://kit.fontawesome.com/726bbd6862.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.min.css' %}" media="screen">
     <link rel="stylesheet" href="{% static 'css/common.css' %}" media="screen">
+
+    <script src="https://cdn.tailwindcss.com"></script>
     
 </head>
 <body class="bg-body-tertiary"> 
     {% include 'module/navbar.html' %}
 
-    <div class="container my-3 ">
-        <div class="row  bg-white full p-3" >
-            <div class="col-md-8 col-lg-9" >
-                {% block content %}
-                {% endblock %}
+    <div class="container mt-32 mb-5 ">
+        <div class="row  bg-white w-full p-3 min-h-[80vh] shadow-md rounded" >
+            <div class="w-full" >
+                <h1 class="border-b pb-3 w-full"> 
+                    {% block title %}{% endblock %}
+                </h1>
+                {% block content %}{% endblock %}
             </div>
         </div>
     </div>
 
     {% include 'module/footer.html' %}
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script> 
 </body>
 </html>
