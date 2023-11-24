@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" 
+    content="width=device-width, initial-scale=1.0">
+    <title>DUKONNECT</title>
+
+    <!-- css load -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.min.css' %}" media="screen">
+    <link rel="stylesheet" href="{% static 'css/common.css' %}" media="screen">
+
+    
+</head>
+<body>
+    {% include 'module/navbar.html' %}
+
+    <div class="container my-3">
+        {% block content %}
+        {% endblock %}
+        <div class="row">
+            <div class="col-md-8 col-lg-9" >
+                {% include 'module/footer.html' %}
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
+

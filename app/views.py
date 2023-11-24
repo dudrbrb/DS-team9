@@ -2,7 +2,7 @@ from typing import Any
 from django import http
 from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView,TemplateView
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin   # 로그인 한 사람만 접근 가능하게 하는 LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
@@ -26,6 +26,7 @@ class Main(ListView):
 
 class Join(generic.CreateView):
     model = Member
+    template_name = 'join.html'
     fields = [
         'member_name', 
         'member_id', 
@@ -43,10 +44,30 @@ class Join(generic.CreateView):
 class List(ListView):
     model = Member
     ordering = '-pk'
+    template_name = 'list.html'
 
-class Mypage(DetailView):
+
+class Mypage(LoginRequiredMixin, UpdateView):
     model = Member
+    fields = [
+        'member_password',
+        'member_birthday',
+        'member_major_1',
+        'member_major_2',
+        'member_hash',
+        'prof_image',
+        'back_image',
+        ]
+    template_name = 'mypage.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user == self.get_object().author:   
+            return super(Mypage, self).dispatch(request, *args, **kwargs)
+        else:
+            raise PermissionDenied
+
 
 class Friends(ListView):
     model = Member
     ordering = '-pk'
+    template_name = 'friends.html'
