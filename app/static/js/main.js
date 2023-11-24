@@ -1,10 +1,11 @@
+window.addEventListener('load', ()=>{
 
-var swiper = new Swiper(".main-swiper", {
-    slidesPerView: 1,
-    direction: 'vertical',
-    pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-    },
-    mousewheel: true,
+    var swiper = new Swiper(".mySwiper", {
+        direction: "vertical",
+        mousewheel: true,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+      });
 });
