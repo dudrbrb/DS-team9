@@ -5,8 +5,8 @@
     <title>DUKONNECT</title>
 
     <!-- css load -->
-    <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.min.css' %}" media="screen">
     <script src="https://kit.fontawesome.com/726bbd6862.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.min.css' %}" media="screen">
     <link rel="stylesheet" href="{% static 'css/common.css' %}" media="screen">
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -16,9 +16,9 @@
     {% include 'module/navbar.html' %}
 
     <div class="container mt-32 mb-5 ">
-        <div class="row  bg-white full p-3 min-h-[80vh] shadow-md rounded" >
-            <div class="col-md-8 col-lg-9" >
-                <h1>
+        <div class="row  bg-white w-full p-3 min-h-[80vh] shadow-md rounded" >
+            <div class="w-full" >
+                <h1 class="border-b pb-3 w-full"> 
                     {% block title %}{% endblock %}
                 </h1>
                 {% block content %}{% endblock %}
