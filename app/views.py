@@ -26,7 +26,18 @@ class Main(ListView):
 
 class Join(generic.CreateView):
     model = Member
-    # fields = ['username', 'email', 'password']
+    fields = [
+        'member_name', 
+        'member_id', 
+        'member_password',
+        'member_birthday',
+        'member_studentNumber',
+        'member_major_1',
+        'member_major_2',
+        'member_hash',
+        'prof_image',
+        'back_image',
+        ]
 
 
 class List(ListView):
@@ -39,4 +50,3 @@ class Mypage(DetailView):
 class Friends(ListView):
     model = Member
     ordering = '-pk'
-
