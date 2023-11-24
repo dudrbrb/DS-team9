@@ -1,43 +1,42 @@
-from django.shortcuts import render
+from typing import Any
+from django import http
+from django.http.response import HttpResponse
+from django.shortcuts import render, redirect
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views import generic
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin   # 로그인 한 사람만 접근 가능하게 하는 LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 
 from .models import Major1, Major2, Tag, Member
 
 # Create your views here.
 
-def main(request):
-    return render(
-        request,
-        'main.html',
-    )
+class Main(ListView):
+    model = Member
+    ordering = '-pk'
+    template_name = 'main.html'
 
-def join(request):
-    return render(
-        request,
-        'join.html',
-    )
 
-def login(request):
-    return render(
-        request,
-        'login.html',
-    )
+    def get_context_data(self, **kwargs):
+        context = super(Main, self).get_context_data()
+        # context['categories'] = Category.objects.all()
+        # context['no_category_post_count'] = Member.objects.filter(category=None).count()
 
-def list(request):
-    return render(
-        request,
-        'list.html',
-    )
+        return context
 
-def mypage(request):
-    return render(
-        request,
-        'mypage.html',
-    )
+class Join(generic.CreateView):
+    model = Member
+    # fields = ['username', 'email', 'password']
 
-def myfriends(request):
-    return render(
-        request,
-            'friend.html',
-    )
 
+class List(ListView):
+    model = Member
+    ordering = '-pk'
+
+class Mypage(DetailView):
+    model = Member
+
+class Friends(ListView):
+    model = Member
+    ordering = '-pk'
 
