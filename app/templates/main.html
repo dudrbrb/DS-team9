@@ -1,6 +1,43 @@
-{% extends 'module/only_nav_base.html' %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>DUKONNECT</title>
 
-{% block content %}
-<h1>메인</h1>
-{% endblock %}
+    
+    <!-- css load -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.min.css' %}" media="screen">
+    <link rel="stylesheet" href="{% static 'css/swiper.min.css' %}" media="screen">
+    <link rel="stylesheet" href="{% static 'css/common.css' %}" media="screen">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" media="screen">
+ 
+</head>
+<body>
+    {% include 'module/navbar.html' %}
+    
+    <div class="swiper main-swiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                1
+            </div>
+            <div class="swiper-slide">
+                2
+            </div>
+            <div class="swiper-slide">
+                3
+            </div>
+            <div class="swiper-slide">
+                4
+            </div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+
+    <script src="{% static 'js/swiper.min.js' %}"></script>
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
