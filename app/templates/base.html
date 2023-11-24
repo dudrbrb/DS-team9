@@ -8,14 +8,6 @@
 <body>
     {% include 'module/logged_in_navbar.html' %}
 
-    {#
-    {% if user.is_authenticated %}
-        {% include 'module/logged_in_navbar.html' %}
-    {% else %}
-        {% include 'module/guest_navbar.html' %}
-    {% endif %}
-    #}   
-
     <div class="container">
         {% block content %}
         {% endblock %}
