@@ -13,18 +13,18 @@
     <link rel="stylesheet" href="{% static 'css/common.css' %}" media="screen">
     
 </head>
-<body>
+<body class="bg-body-tertiary"> 
     {% include 'module/navbar.html' %}
 
-    <div class="container my-3">
-        <div class="row">
-            <div class="col-md-8 col-lg-9 white" >
+    <div class="container my-3 ">
+        <div class="row  bg-white full p-3" >
+            <div class="col-md-8 col-lg-9" >
                 {% block content %}
                 {% endblock %}
             </div>
         </div>
     </div>
-    
+
     {% include 'module/footer.html' %}
 
 </body>
