@@ -6,7 +6,7 @@ urlpatterns = [
     path('', views.Main.as_view()),
     path('join/', views.Join.as_view()),
     path('list/', views.List.as_view()),
-    path('mypage/', views.Mypage.as_view()),
+    path('mypage/<int:pk>/', views.Mypage.as_view()),
     path('friends/', views.Friends.as_view()),
 
     # 로그인, 로그아웃은 views 없이 구현

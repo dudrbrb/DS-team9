@@ -47,9 +47,25 @@ class List(ListView):
     template_name = 'list.html'
 
 
-class Mypage(DetailView):
+class Mypage(LoginRequiredMixin, UpdateView):
     model = Member
+    fields = [
+        'member_password',
+        'member_birthday',
+        'member_major_1',
+        'member_major_2',
+        'member_hash',
+        'prof_image',
+        'back_image',
+        ]
     template_name = 'mypage.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user == self.get_object().author:   
+            return super(Mypage, self).dispatch(request, *args, **kwargs)
+        else:
+            raise PermissionDenied
+
 
 class Friends(ListView):
     model = Member
