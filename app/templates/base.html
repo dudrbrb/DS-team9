@@ -3,15 +3,29 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" 
+    content="width=device-width, initial-scale=1.0">
+
+    <!-- css load -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.min.css' %}" media="screen">
+    <script src="https://kit.fontawesome.com/726bbd6862.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/common.css' %}">
+
+    
 </head>
 <body>
-    {% include 'module/logged_in_navbar.html' %}
+    {% include 'module/navbar.html' %}
 
-    <div class="container">
-        {% block content %}
-        {% endblock %}
+    <div class="container my-3">
+        <div class="row">
+            <div class="col-md-8 col-lg-9" >
+                {% block content %}
+                {% endblock %}
+            </div>
+            <div class="col-md-8 col-lg-9" >
+                {% include 'module/footer.html' %}
+            </div>
+        </div>
     </div>
-    {% include 'module/footer.html' %}
 </body>
 </html>
