@@ -1,12 +1,54 @@
 <!DOCTYPE html>
-<html lang="ko">
+{% load static %}
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>메인 페이지입니다.</title>
+
+    <title>DUKONNECT</title>
+
+    
+    <!-- css load -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.min.css' %}" media="screen">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="{% static 'css/common.css' %}" media="screen">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" media="screen">
+ 
 </head>
 <body>
-    <h1> 야호 </h1>
-    
+    {% include 'module/navbar.html' %}
+<!--     
+    <div class="swiper main-swiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide section1">
+                1
+            </div>
+            <div class="swiper-slide section2">
+                2
+            </div>
+            <div class="swiper-slide section3">
+                3
+            </div>
+            <div class="swiper-slide section4">
+                4
+            </div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div> -->
+
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide section1">Slide 1</div>
+          <div class="swiper-slide section2">Slide 2</div>
+          <div class="swiper-slide section3">Slide 3</div>
+          <div class="swiper-slide section4">Slide 4</div>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+
+    <!-- js load -->
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>
