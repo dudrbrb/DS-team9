@@ -1,8 +1,27 @@
 {% extends 'module/base.html' %}
-{% block title %}공개구벗{% endblock %}
 
+  {% block title %}공개구벗{% endblock %}
 
-{% block content %}
-
-
-{% endblock %}
+  {% block content %}
+    <!-- {% if list.exists %} -->
+      <!-- {% for p in list %} -->
+        <div class="card" style="width: 18rem;">
+        <!-- {% if p.head_image %} -->
+            <!-- <img src="{{ p.head_image.url }}" class="card-img-top" alt="Card image cap"> -->
+          <!-- {% else %} -->
+            <img class="card-img-top" src="https://picsum.photos/seed/{{ p.id }}/800/200" alt="random image">
+          <!-- {% endif %} -->
+          <div class="card-body">
+            <h5 class="card-title">{{ p.title }}</h5>
+            <p class="card-text">{{ p.content | truncatewords:10 }}</p>
+            <a href="{{ p.get_absolute_url }}" class="btn btn-primary">Read More &rarr;</a>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      <!-- {% endfor %}
+    {% else %}
+      <h1>게시물이 없습니다.</h1>
+    {% endif %} -->
+  {% endblock %}
+  
+ 
