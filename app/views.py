@@ -47,8 +47,11 @@ class List(ListView):
 class Mypage(LoginRequiredMixin, UpdateView):
     model = Member
     fields = [
+        'member_name', 
+        'member_id', 
         'member_password',
         'member_birthday',
+        'member_studentNumber',
         'member_major_1',
         'member_major_2',
         'member_hash',
@@ -58,7 +61,8 @@ class Mypage(LoginRequiredMixin, UpdateView):
     template_name = 'mypage.html'
 
     def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated and request.user == self.get_object().author:   
+        # if request.user.is_authenticated and request.user == self.get_object().author:   
+        if request.user.is_authenticated :   
             return super(Mypage, self).dispatch(request, *args, **kwargs)
         else:
             raise PermissionDenied
