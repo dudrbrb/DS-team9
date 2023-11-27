@@ -13,35 +13,82 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="{% static 'css/common.css' %}" media="screen">
     <link rel="stylesheet" href="{% static 'css/main.css' %}" media="screen">
- 
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
     {% include 'module/navbar.html' %}
-<!--     
-    <div class="swiper main-swiper">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide section1">
-                1
-            </div>
-            <div class="swiper-slide section2">
-                2
-            </div>
-            <div class="swiper-slide section3">
-                3
-            </div>
-            <div class="swiper-slide section4">
-                4
-            </div>
-        </div>
-        <div class="swiper-pagination"></div>
-    </div> -->
-
     <div class="swiper mySwiper">
         <div class="swiper-wrapper">
-          <div class="swiper-slide section1">Slide 1</div>
-          <div class="swiper-slide section2">Slide 2</div>
-          <div class="swiper-slide section3">Slide 3</div>
-          <div class="swiper-slide section4">Slide 4</div>
+            <div class="swiper-slide section1">
+                <div class="container mt-3">
+                    <div class="row" >
+                        <div class="flex justify-between items-center mb-5">
+                            <div class="w-[43%]">
+                                <h2>
+                                    즐거운 학교생활 !<br>
+                                    추억을 공유 할 친구 사귀기 !
+                                </h2>
+                                <p>
+                                    우리 학교에서 새로운 친구를 사귀고 싶을 때
+                                    덕커넥트를 통해 관심사가 비슷한 친구를 사귀어요 !
+                                </p>
+                                {% if user.is_authenticated %}
+                                <a href="/mypage">
+                                    시작하기
+                                </a>
+                                {% else %}
+                                <a href="/login">
+                                    시작하기
+                                </a>
+                                {% endif %}
+                            </div>
+                            <div  class="w-[43%]">
+                                <img src="{% static 'images/homepage/main/school.png' %}">
+                            </div>
+                        </div>
+        
+                        <div class="card">
+                            <b class="text-xl mt-[10px] pl-[20px]">덕커넥트 이용방법</b>
+                            <ul class="flex justify-between items-center step">
+                                <li>
+                                    <b >STEP1</b>
+                                    <p>[내 정보]에서 나의 정보를 입력해요. 이 정보를 바탕으로 친구를 매칭해요.</p>
+                                </li>
+                                <div class="border-1 h-full "></div>
+                                <li>
+                                    <b >STEP2</b>
+                                    <p>[내 친구]에서 [1:1 매칭 시작하기]를 선택해요. 매칭이 완료되면 서로의 전화번호가 공유돼요.</p>
+                                </li>
+                                <div class="border-1 h-full "></div>
+                                <li>
+                                    <b >STEP3</b>
+                                    <p>더욱 다양하고 많은 친구를 만나고 싶을 땐 [내 정보]에서 [공개구친]에 체크해요.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide section2">
+                <div class="container mt-3">
+                    <div class="row" >
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide section3">
+                <div class="container mt-3">
+                    <div class="row" >
+                        Slide 3
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide section4">
+                <div class="container mt-3">
+                    <div class="row" >
+                        Slide 4
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="swiper-pagination"></div>
       </div>
