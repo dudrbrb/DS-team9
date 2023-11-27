@@ -58,13 +58,13 @@ class Member(models.Model):
 
     # 회원과 매칭된 회원(pk) 목록
     
-    member_friends = ArrayField(base_field=models.IntegerField(), null=True, blank=True, default=list)
+    member_friends = models.TextField(blank=True)
 
     # 회원을 like한 회원(pk) 목록
-    member_liked = ArrayField(base_field=models.IntegerField(), null=True, blank=True, default=list)
+    member_liked = models.TextField(blank=True)
 
     # 회원이 like한 회원(pk) 목록
-    member_like = ArrayField(base_field=models.IntegerField(), null=True, blank=True, default=list)
+    member_like = models.TextField(blank=True)
 
     # 회원 공개구친 여부
     member_open = models.BooleanField()
@@ -84,7 +84,7 @@ class Member(models.Model):
 
     # admin에서 표시될 제목
     def __str__(self):
-        return f'[{self.pk}] {self.name} ({self.id})'
+        return f'[{self.pk}] {self.member_name} ({self.member_id})'
     
     # 상세페이지 링크 (마이페이지)
     def get_absolute_url(self):
