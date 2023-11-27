@@ -40,7 +40,6 @@ class Join(generic.CreateView):
         'back_image',
         ]
 
-
 class List(ListView):
     model = Member
     ordering = '-pk'
