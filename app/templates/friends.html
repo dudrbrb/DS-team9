@@ -1,8 +1,27 @@
+
 {% extends 'module/base.html' %}
+<!DOCTYPE html>
+{% load static %}
+<html lang = "en">
 {% block title %}내 친구{% endblock %}
 
 {% block content %}
 
+{% for p in friends %}
+
+<body>
+    <div class="grid justify-items-start ...">
+        <div>01</div>
+        <div>02</div>
+        <div>03</div>
+        <div>04</div>
+        <div>05</div>
+        <div>06</div>
+      </div>
+ 
+</body>
+</html>
+{% endfor %}
 
 
 {% endblock %}
