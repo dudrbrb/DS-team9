@@ -9,8 +9,6 @@ from django.core.exceptions import PermissionDenied
 
 from .models import Major1, Major2, Tag, Member
 
-# Create your views here.
-
 class Main(ListView):
     model = Member
     ordering = '-pk'
