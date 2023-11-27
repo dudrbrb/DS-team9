@@ -1,10 +1,10 @@
 from django.db import models
-from django.contrib.postgres.fields import ArrayField
+# from django.contrib.postgres.fields import ArrayField
 
 
 class Major1(models.Model):
-    name = models.CharField(max_length=10, unique=True)
-    slug = models.SlugField(max_length=10, unique=True, allow_unicode=True)
+    name = models.CharField(max_length=20)
+    slug = models.SlugField(max_length=20, allow_unicode=True)
 
     def __str__(self):
         return self.name
@@ -17,9 +17,10 @@ class Major2(Major1):
     pass
     
 
+
 class Tag(models.Model):
     name = models.CharField(max_length=50)
-    slug = models.SlugField(max_length=200, unique=True)
+    slug = models.SlugField(max_length=200, unique=True, allow_unicode=True)
 
     def __str__(self):
         return self.name
@@ -47,7 +48,7 @@ class Member(models.Model):
 
     # 회원의 제1전공 ManyToManyField 사용
     member_major_1 = models.ManyToManyField(Major1, related_name='+')
-
+ 
     # 회원의 제2전공
     member_major_2 = models.ManyToManyField(Major2, related_name='+')
 
@@ -55,15 +56,15 @@ class Member(models.Model):
     member_hash = models.ManyToManyField(Tag, blank=True)
 
 
-    # # 회원과 매칭된 회원(pk) 목록
+    # 회원과 매칭된 회원(pk) 목록
     
-    member_friends = ArrayField(models.IntegerField(),  null=True)
+    member_friends = models.ArrayField(models.IntegerField(), null=True, blank=True, default=list)
 
-    # # 회원을 like한 회원(pk) 목록
-    member_liked = ArrayField(models.IntegerField(),  null=True)
+    # 회원을 like한 회원(pk) 목록
+    member_liked = models.ArrayField(models.IntegerField(), null=True, blank=True, default=list)
 
-    # # 회원이 like한 회원(pk) 목록
-    member_like = ArrayField(models.IntegerField(),  null=True)
+    # 회원이 like한 회원(pk) 목록
+    member_like = models.ArrayField(models.IntegerField(), null=True, blank=True, default=list)
 
     # 회원 공개구친 여부
     member_open = models.BooleanField()
