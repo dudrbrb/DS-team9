@@ -1,10 +1,10 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
-from django.db import models
+from django.db.models import SlugField
 
 class Major1(models.Model):
     name = models.CharField(max_length=20)
-    slug = models.SlugField(max_length=20, allow_unicode=True)
+    slug = SlugField(max_length=20, allow_unicode=True)
 
     def __str__(self):
         return self.name
@@ -13,14 +13,21 @@ class Major1(models.Model):
         return f'/list/major/{self.slug}/'
     
 
-class Major2(Major1):
-    pass
+class Major2(models.Model):
+    name = models.CharField(max_length=20)
+    slug = SlugField(max_length=20, allow_unicode=True)
+
+    def __str__(self):
+        return self.name
+    
+    def get_absolute_url(self):
+        return f'/list/major/{self.slug}/'
     
 
 
 class Tag(models.Model):
     name = models.CharField(max_length=50)
-    slug = models.SlugField(max_length=200, unique=True, allow_unicode=True)
+    slug = SlugField(max_length=200, unique=True, allow_unicode=True)
 
     def __str__(self):
         return self.name
@@ -55,16 +62,6 @@ class Member(models.Model):
     # 회원 취향 해시 목록
     member_hash = models.ManyToManyField(Tag, blank=True)
 
-
-    # 회원과 매칭된 회원(pk) 목록
-    member_friends = ArrayField(base_field=models.IntegerField(), null=True, blank=True, default=list)
-
-    # 회원을 like한 회원(pk) 목록
-    member_liked = ArrayField(base_field=models.IntegerField(), null=True, blank=True, default=list)
-
-    # 회원이 like한 회원(pk) 목록
-    member_like = ArrayField(base_field=models.IntegerField(), null=True, blank=True, default=list)
-
     # 회원 공개구친 여부
     member_open = models.BooleanField()
 
@@ -83,8 +80,20 @@ class Member(models.Model):
 
     # admin에서 표시될 제목
     def __str__(self):
-        return f'[{self.pk}] {self.name} ({self.id})'
+        return f'[{self.pk}] {self.member_name} ({self.member_id})'
     
     # 상세페이지 링크 (마이페이지)
     def get_absolute_url(self):
         return f'/mypage/{self.pk}/'
+
+
+
+class MyModel(models.Model):
+    # 회원과 매칭된 회원(pk) 목록
+    member_friends = models.TextField(blank=True)
+
+    # 회원을 like한 회원(pk) 목록
+    member_liked = models.TextField(blank=True)
+
+    # 회원이 like한 회원(pk) 목록
+    member_like = models.TextField(blank=True)
