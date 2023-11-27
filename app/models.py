@@ -1,5 +1,5 @@
 from django.db import models
-# from django.contrib.postgres.fields import ArrayField
+from django.contrib.postgres.fields import ArrayField
 
 
 class Major1(models.Model):
@@ -58,13 +58,13 @@ class Member(models.Model):
 
     # 회원과 매칭된 회원(pk) 목록
     
-    member_friends = models.ArrayField(models.IntegerField(), null=True, blank=True, default=list)
+    member_friends = ArrayField(base_field=models.IntegerField(), null=True, blank=True, default=list)
 
     # 회원을 like한 회원(pk) 목록
-    member_liked = models.ArrayField(models.IntegerField(), null=True, blank=True, default=list)
+    member_liked = ArrayField(base_field=models.IntegerField(), null=True, blank=True, default=list)
 
     # 회원이 like한 회원(pk) 목록
-    member_like = models.ArrayField(models.IntegerField(), null=True, blank=True, default=list)
+    member_like = ArrayField(base_field=models.IntegerField(), null=True, blank=True, default=list)
 
     # 회원 공개구친 여부
     member_open = models.BooleanField()
