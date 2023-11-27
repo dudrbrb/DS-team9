@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
-
+from django.db import models
 
 class Major1(models.Model):
     name = models.CharField(max_length=20)
@@ -57,7 +57,6 @@ class Member(models.Model):
 
 
     # 회원과 매칭된 회원(pk) 목록
-    
     member_friends = ArrayField(base_field=models.IntegerField(), null=True, blank=True, default=list)
 
     # 회원을 like한 회원(pk) 목록
