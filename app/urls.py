@@ -9,8 +9,8 @@ urlpatterns = [
     path('mypage/<int:pk>/', views.Mypage.as_view()),
     path('friends/', views.Friends.as_view()),
 
-    # 로그인, 로그아웃은 views 없이 구현
+
     path('login/', LoginView.as_view(template_name='login.html'), name='login'), 
-    # 템플릿 지정만 파라미터로 넘겨주면 끝
+    
     path('logout/', LogoutView.as_view(), name='logout'), 
 ]
