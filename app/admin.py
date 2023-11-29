@@ -1,6 +1,8 @@
 from django.contrib import admin
 from .models import Member, Major1, Major2, Tag
 
+
+
 class MajorAdmin1(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name', )}
     
