@@ -17,8 +17,8 @@ class Main(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(Main, self).get_context_data()
-        # context['categories'] = Category.objects.all()
-        # context['no_category_post_count'] = Member.objects.filter(category=None).count()
+        context['major1'] = Major1.objects.all()
+        context['major2'] = Major2.objects.all()
 
         return context
 
@@ -66,18 +66,6 @@ class Mypage(LoginRequiredMixin, UpdateView):
             return super(Mypage, self).dispatch(request, *args, **kwargs)
         else:
             raise PermissionDenied
-
-
-# class Friends(ListView):
-#     model = Member
-#     ordering = '-pk'
-#     template_name = 'friends.html'
-
-#     def get_context_data(self, **kwargs):
-#         context = super(Friends, self).get_context_data()
-
-#         return context
-        
 
 class Friends(ListView):
     model = Member
