@@ -8,44 +8,65 @@
     <title>회원가입</title>
 </head>
 <body>
-    <h2>회원가입</h2>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
+        <div class="mb-2">
+            <label class="min-w-[130px]">이름</label>
+            <input type="text" id="member_name" name="member_name" required><br>
+        </div>
+
+        <div class="mb-2">
+            <label class="min-w-[130px]">아이디</label>
+            <input type="text" id="member_id" name="member_id" required><br>
+        </div>
+
+        <div class="mb-2">
+            <label class="min-w-[130px]">비밀번호</label>
+            <input type="password" id="member_password" name="member_password" required><br>
+        </div>
+
+        <div class="mb-2">
+            <label class="min-w-[130px]">생년월일</label>
+            <input type="text" id="member_birthday" name="member_birthday" required><br>
+        </div>
+
+        <div class="mb-2">
+            <label class="min-w-[130px]">학번</label>
+            <input type="text" id="member_studentNumber" name="member_studentNumber" required><br>
+        </div>
+
+        <div class="mb-2">
+            <label class="min-w-[130px]">제1전공</label>
+            <input type="text" id="member_major_1" name="member_major_1" required><br>
+        </div>
+
+        <div class="mb-2">
+            <label class="min-w-[130px]">제2전공</label>
+            <input type="text" id="member_major_2" name="member_major_2" ><br>
+        </div>
+
+        <div class="mb-2">
+            <label class="min-w-[130px]">취향 해시 목록</label>
+            <input type="text" id="member_hash" name="member_hash"><br>
+        </div>
+
+        <div class="mb-2">
+            <label class="min-w-[130px]">공개 여부</label>
+            <label for="member_open" class="">공개 </label>
+            <input type="checkbox" id="member_open" name="member_open" class="shadow-none w-[15px] h-[15px]"><br>
+        </div>
+
+        <div class="mb-2">
+            <label for="prof_image" class="min-w-[130px]">프로필 이미지</label>
+            <input type="file" id="prof_image" name="prof_image" class="shadow-none border-none rounded-none" ><br>
+        </div>
+
+        <div class="mb-2">
+            <label for="back_image" class="min-w-[130px]">배경 이미지</label>
+            <input type="file" id="back_image" name="back_image" class="shadow-none border-none rounded-none"><br>
+        </div>
         
-        <label for="id_member_name">이름:</label>
-        <input type="text" id="id_member_name" name="member_name" required><br>
-        
-        <label for="id_member_id">아이디:</label>
-        <input type="text" id="id_member_id" name="member_id" required><br>
-        
-        <label for="id_member_password">비밀번호:</label>
-        <input type="password" id="id_member_password" name="member_password" required><br>
-        
-        <label for="id_member_birthday">생년월일:</label>
-        <input type="text" id="id_member_birthday" name="member_birthday" required><br>
-        
-        <label for="id_member_studentNumber">학번:</label>
-        <input type="text" id="id_member_studentNumber" name="member_studentNumber" required><br>
-        
-        <label for="id_member_major_1">제1전공:</label>
-        <input type="text" id="id_member_major_1" name="member_major_1" required><br>
-        
-        <label for="id_member_major_2">제2전공:</label>
-        <input type="text" id="id_member_major_2" name="member_major_2" ><br>
-        
-        <label for="id_member_hash">취향 해시 목록:</label>
-        <input type="text" id="id_member_hash" name="member_hash"><br>
-        
-        <label for="id_member_open">공개 여부:</label>
-        <input type="checkbox" id="id_member_open" name="member_open"><br>
-        
-        <label for="id_prof_image">프로필 이미지:</label>
-        <input type="file" id="id_prof_image" name="prof_image"><br>
-        
-        <label for="id_back_image">배경 이미지:</label>
-        <input type="file" id="id_back_image" name="back_image"><br>
-        
-        <button type="submit">가입하기</button>
+        <button type="submit" class="bg-[#FF176A] text-white px-3 rounded">가입하기</button>
     </form>
 </body>
 </html>

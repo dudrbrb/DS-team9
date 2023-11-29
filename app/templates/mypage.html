@@ -4,8 +4,6 @@
 {% block title %}마이페이지{% endblock %}
 
 {% block content %}
-
-    <title>마이페이지</title>
     <!-- css load -->
     <link rel="stylesheet" href="{% static 'css/mypage.css' %}" media="screen">
 
@@ -13,30 +11,8 @@
 
         {% csrf_token %}
         {% crispy form %}
-
-
-          <!-- <label for="id_back_image">배경 이미지: <input type="file" id="id_back_image" name="back_image"></label>
-          
-          <label for="id_member_name">이름: <input type="text" id="id_member_name" name="member_name" required value="{{ Member.member_name }}"></label>
-          
-          <label for="id_member_id">아이디: <input type="text" id="id_member_id" name="member_id" required value="{{ Member.member_id }}"></label>
-          
-          <label for="id_member_password">비밀번호: <input type="password" id="id_member_password" name="member_password" required value="{{ Member.member_password }}"></label>
-          
-          <label for="id_member_birthday">생년월일: <input type="text" id="id_member_birthday" name="member_birthday" required value="{{ Member.member_birthday }}"></label>
-          
-          <label for="id_member_studentNumber">학번: <input type="text" id="id_member_studentNumber" name="member_studentNumber" required value="{{ Member.member_studentNumber }}"></label>
-          
-          <label for="id_member_major_1">제1전공: <input type="text" id="id_member_major_1" name="member_major_1" required value="{{ Member.member_major_1 }}"></label>
-          
-          <label for="id_member_major_2">제2전공: <input type="text" id="id_member_major_2" name="member_major_2" required value="{{ Member.id_member_major_2 }}"></label>
-          
-          <label for="id_member_hash">취향 해시 목록: <input type="text" id="id_member_hash" name="member_hash"></label>
-          
-          <label for="id_member_open">프로필을 공개합니다 <input type="checkbox" id="id_member_open" name="member_open"></label> -->
-          
-          <button type="submit">수정하기</button>
-          <button type="submit">탈퇴하기</button>
+          <button type="submit" class="bg-pink py-3 rounded text-white">수정하기</button>
+          <button type="submit" class="bg-pink py-3 rounded text-white">탈퇴하기</button>
       </div>
     </form>
 {% endblock %}
