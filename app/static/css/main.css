@@ -79,6 +79,8 @@ body {
   padding-left: 30px;
   color: #fff;
   font-size: 22px;
-  line-height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
