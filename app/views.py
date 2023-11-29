@@ -68,7 +68,22 @@ class Mypage(LoginRequiredMixin, UpdateView):
             raise PermissionDenied
 
 
+# class Friends(ListView):
+#     model = Member
+#     ordering = '-pk'
+#     template_name = 'friends.html'
+
+#     def get_context_data(self, **kwargs):
+#         context = super(Friends, self).get_context_data()
+
+#         return context
+        
+
 class Friends(ListView):
     model = Member
     ordering = '-pk'
     template_name = 'friends.html'
+    def get_context_data(self, **kwargs):
+        context = super(Friends, self).get_context_data()
+      
+        return context

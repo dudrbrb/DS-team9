@@ -1,38 +1,31 @@
 {% extends 'module/base.html' %}
 
-  {% block title %}공개구벗{% endblock %}
+{% block title %}공개구벗{% endblock %}
 
-  {% block content %}
-    <!-- {% if list.exists %}
-      {% for p in list %}
-        <div class="card" >
-        {% if p.head_image %}
-            <img src="{{ p.head_image.url }}" class="card-img-top" alt="Card image cap">
-          {% else %}
-            <img class="card-img-top" src="https://picsum.photos/seed/{{ p.id }}/800/200" alt="random image">
-          {% endif %}
-          <div class="card-body">
-            <h5 class="card-title">{{ p.title }}</h5>
-            <p class="card-text">{{ p.content | truncatewords:10 }}</p>
-            <a href="{{ p.get_absolute_url }}" class="btn btn-primary">Read More &rarr;</a>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+{% block content %}
+  <div class="flex justify-between items-start flex-wrap">
+    {% for object in object_list %}
+      <div class="card p-0 w-[32%] mb-5">
+        <img class="card-img-top" src="https://picsum.photos/seed/{{ object.id }}/800/200" alt="random image">
+        <div class="card-body">
+          <h5 class="card-title">{{ member.member_name }}</h5>
+          <p class="card-text">{{ member.member_major_1 }}</p>
+          <span class="btn btn-primary" style="background: #FF176A; width: 30%; border-radius: 60px; border: none;">#해쉬태그</span>
+          <span class="btn btn-primary" style="background: #FF176A; width: 30%; border-radius: 60px; border: none;">#해쉬태그</span>
+          <span class="btn btn-primary" style="background: #FF176A; width: 30%; border-radius: 60px; border: none;">#해쉬태그</span>
+        </div>
+        <div class="profile-container d-flex align-items-end">
+          <!-- 좌측에 원형 프로필 사진 -->
+          <img src="{{ object.profile_image_url }}" alt="프로필 사진" class="profile-image">
+          
+          <!-- 우측에 유저 이름 -->
+          <div class="user-name ml-2">
+            <span>{{ object.user_name }}</span>
           </div>
         </div>
-      {% endfor %}
-    {% else %}
-      <h1>게시물이 없습니다.</h1>
-    {% endif %} -->
-    <div class="flex justify-between items-start flex-wrap">
-
-      <div class="card p-0 w-[32%] mb-5" >
-            <img class="card-img-top" src="https://picsum.photos/seed/{{ p.id }}/800/200" alt="random image">
-          <div class="card-body">
-            <h5 class="card-title">제목</h5>
-            <p class="card-text">내용</p>
-            <a href="/" class="btn btn-primary">Read More &rarr;</a>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
+      </div>
+    {% endfor %}
+  </div>
       <div class="card p-0 w-[32%] mb-5" >
             <img class="card-img-top" src="https://picsum.photos/seed/{{ p.id }}/800/200" alt="random image">
           <div class="card-body">
@@ -64,4 +57,3 @@
 
   {% endblock %}
   
- 
