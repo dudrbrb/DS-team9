@@ -11,8 +11,11 @@
 
         {% csrf_token %}
         {% crispy form %}
-          <button type="submit" class="bg-pink py-3 rounded text-white">수정하기</button>
-          <button type="submit" class="bg-pink py-3 rounded text-white">탈퇴하기</button>
+
+        <div class="flex">
+          <button type="submit" class="bg-[#FF176A] text-white px-3 rounded mt-4 inline-block mr-1">수정하기</button>
+          <button type="submit" class="bg-[#FF176A] text-white px-3 rounded mt-4 inline-block">탈퇴하기</button>
+        </div>
       </div>
     </form>
 {% endblock %}
