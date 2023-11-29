@@ -23,20 +23,20 @@
                     <div class="row" >
                         <div class="flex justify-between items-center mb-4">
                             <div class="w-[43%]">
-                                <h2 class="font-bold text-4xl">
+                                <h2 class="font-bold text-4xl mb-3">
                                     즐거운 학교생활 !<br>
                                     추억을 공유 할 친구 사귀기 !
                                 </h2>
-                                <p>
+                                <p class="text-lg mb-5">
                                     우리 학교에서 새로운 친구를 사귀고 싶을 때<br>
                                     덕커넥트를 통해 관심사가 비슷한 친구를 사귀어요 !
                                 </p>
                                 {% if user.is_authenticated %}
-                                <a href="/mypage">
+                                <a href="/mypage" class="text-pink border-1">
                                     시작하기
                                 </a>
                                 {% else %}
-                                <a href="/login">
+                                <a href="/login" class="text-pink border-1">
                                     시작하기
                                 </a>
                                 {% endif %}
@@ -104,24 +104,52 @@
             <div class="swiper-slide section3">
                 <div class="container  mt-[150px] h-[80vh]">
                     <div class="row" >
-                        <h4 class="font-bold text-4xl text-center">
+                        <h4 class="font-bold text-4xl text-left mb-3">
                             친구를 찾아보자 !
                         </h4>
-                        <p>
+                        <p class="mb-5 text-lg">
                             우리 학교에서 새로운 친구를 사귀고 싶을 때<br>
                             덕커넥트를 통해 관심사가 비슷한 친구를 사귀어요 !
                         </p>
 
-                        <div>
-                            <div class="card">
-                                <div class="icon">
+                        <div class="flex justify-between">
+                            <div class="card p-0 w-[31%]">
+                                <div class="icon bg-semigray center flex-col py-3 h-[250px]">
                                     <img src="{% static 'images/homepage/main/icon1.png' %}" >
-                                    <b>내 정보 입력</b>
+                                    <b class="text-2xl font-bold mt-4">내 정보 입력</b>
                                 </div>
-                                <div>
-                                    <p>
+                                <div class="p-3 flex flex-col justify-between h-auto">
+                                    <p class="text-lg">
                                         나에 대한 전공과 취향을 입력하고 만나고 싶은 친구의 전공과 취향도 함께 입력해요!
                                     </p>
+                                    <a href="/join" class="text-pink">바로가기  →</a>
+                                </div>
+                            </div>
+                            <div class="card p-0 w-[31%]">
+                                <div class="icon  bg-pink center flex-col py-3 h-[250px]">
+                                    <img src="{% static 'images/homepage/main/icon2.png' %}" >
+                                    <b class="text-2xl font-bold mt-4 text-white">1 : 1 매칭</b>
+                                </div>
+                                <div class="p-3 flex flex-col justify-between h-auto">
+                                    <p class="text-lg">
+                                        입력한 정보를 바탕으로 가장 많은 키워드가
+                                        겹치는 친구를 찾아서 매칭해줘요!
+                                    </p>
+                                    <a href="/mypage" class="text-pink">바로가기  →</a>
+                                </div>
+                            </div>
+                            <div class="card p-0 w-[31%]">
+                                <div class="icon bg-yellow center flex-col py-3 h-[250px]">
+                                    <img src="{% static 'images/homepage/main/icon3.png' %}" >
+                                    <b class="text-2xl font-bold mt-4 text-white">공개 구친</b>
+                                </div>
+                                <div class="p-3 flex flex-col justify-between h-auto">
+                                    <p class="text-lg">
+                                        더욱 다양하고 많은 친구를 만나보고 싶을
+                                        땐 나의 프로필을 공개하여 공개구친에
+                                        참여해요!
+                                    </p>
+                                    <a href="/list" class="text-pink">바로가기  →</a>
                                 </div>
                             </div>
                         </div>
