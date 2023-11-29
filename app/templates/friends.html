@@ -8,19 +8,28 @@
 <ul role="list" class="divide-y divide-gray-100">
     {% for m in object_list %}
   
-      <li class="flex justify-between gap-x-6 py-5">
+      <li class="flex justify-between gap-x-6 border-1 p-3 mb-2 hover:bg-gray-50 rounded">
         <div class="flex min-w-0 gap-x-4">
-          <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="{{ m.prof_image.url }}">
-          
-          <div class="min-w-0 flex-auto">
-            <p class="text-lg font-semibold leading-6 text-gray-900">{{m.member_name}}</p>
-            
+          <img class="h-[100px] w-[100px] flex-none rounded-full bg-gray-50" src="{{ m.prof_image.url }}">
+
+          <div class="flex-auto">
+            <p class="text-lg font-semibold text-gray-900 mb-1">
+              {{m.member_name}}
+            </p>
+            <p class="mb-2">
+              {{m.member_major_1}} |  {{m.member_major_2}} <br>
+              {{m.member_birthday}}<br>
+              
+            </p>
+            {% if m.member_hash.exists %}
+              {% for tag in m.member_hash.iterator %}
+                <span class="bg-pink rounded-2xl px-3 py-1 text-white break-keep inline-block mt-1 mr-1">{{tag}}</span>
+              {% endfor %}
+            {% endif %}
+     
           </div>
         </div>
-        <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-          <p class="text-sm leading-6 text-gray-900">Co-Founder / CEO</p>
-          <p class="mt-1 text-xs leading-5 text-gray-500">Last seen <time datetime="2023-01-23T13:23Z">3h ago</time></p>
-        </div>
+   
       </li>
     {% endfor %}
 

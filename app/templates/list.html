@@ -15,16 +15,18 @@
       </div>
 
       
-      <div class="h-[200px] p-3">
+      <div class="h-[300px] p-3">
         <h5 class="flex  items-center"> 
           <img src="{{ m.prof_image.url }}" alt="프로필 사진" class="w-[50px] h-[50px] mr-3"> 
           {{ m.member_name }}
       </h5>
         <p class="card-text">{{ m.member_major_1 }} | {{ m.member_major_2 }}</p>
-        <span class="bg-pink rounded-2xl px-3 py-1 text-white break-keep inline-block" >#해쉬태그</span>
-        <span class="bg-pink rounded-2xl px-3 py-1 text-white break-keep inline-block" >#해쉬태그</span>
-        <span class="bg-pink rounded-2xl px-3 py-1 text-white break-keep inline-block" >#해쉬태그</span>
-     
+        {% if m.member_hash.exists %}
+          {% for tag in m.member_hash.iterator %}
+            <span class="bg-pink rounded-2xl px-3 py-1 text-white break-keep inline-block mt-1 mr-1">{{tag}}</span>
+          {% endfor %}
+        {% endif %}
+
       </div>
     </div>
     {% endfor %}
