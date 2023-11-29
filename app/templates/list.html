@@ -4,19 +4,19 @@
 
 {% block content %}
   <div class="flex justify-between items-start flex-wrap">
-    {% for object in object_list %}
+    {% for m in object_list %}
       <div class="card p-0 w-[32%] mb-5">
         <img class="card-img-top" src="https://picsum.photos/seed/{{ object.id }}/800/200" alt="random image">
         <div class="card-body">
-          <h5 class="card-title">{{ member.member_name }}</h5>
-          <p class="card-text">{{ member.member_major_1 }}</p>
+          <h5 class="card-title">{{ m.member_name }}</h5>
+          <p class="card-text">{{ m.member_major_1 }}</p>
           <span class="btn btn-primary" style="background: #FF176A; width: 30%; border-radius: 60px; border: none;">#해쉬태그</span>
           <span class="btn btn-primary" style="background: #FF176A; width: 30%; border-radius: 60px; border: none;">#해쉬태그</span>
           <span class="btn btn-primary" style="background: #FF176A; width: 30%; border-radius: 60px; border: none;">#해쉬태그</span>
         </div>
         <div class="profile-container d-flex align-items-end">
           <!-- 좌측에 원형 프로필 사진 -->
-          <img src="{{ object.profile_image_url }}" alt="프로필 사진" class="profile-image">
+          <img src="{{ m.prof_image.url }}" alt="프로필 사진" class="profile-image">
           
           <!-- 우측에 유저 이름 -->
           <div class="user-name ml-2">
