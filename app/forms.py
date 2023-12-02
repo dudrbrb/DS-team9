@@ -83,6 +83,7 @@ class DateInput(forms.DateInput):
 
 class CustomUserCreationForm(UserCreationForm):
     name = forms.CharField(label="이름 ", widget=forms.TextInput(attrs={'placeholder': '이름을 입력해주세요'}))
+    nickname = forms.CharField(label="닉네임 ", widget=forms.TextInput(attrs={'placeholder': '닉네임 입력해주세요'}))
     username = forms.CharField(label="ID" , widget=forms.TextInput(attrs={'placeholder': 'ID를 입력해주세요'}))
     password1 = forms.CharField(label="비밀번호 ", widget=forms.TextInput(attrs={'placeholder': '비밀번호를 입력하세요', 'type':'password'}))
     password2 = forms.CharField(label="비밀번호 확인 ", widget=forms.TextInput(attrs={'placeholder': '비밀번호 확인', 'type':'password'}))
@@ -113,7 +114,7 @@ class CustomUserCreationForm(UserCreationForm):
     
     class Meta(UserCreationForm.Meta):
         model = get_user_model()
-        fields = ("name", "username", "password1", "password2","birth", "tel", "email", "studentID",  "major1","major2", "tag", "prof_image", "back_image", "open_profile")
+        fields = ("name", "nickname","username", "password1", "password2","birth", "tel", "email", "studentID",  "major1","major2", "tag", "prof_image", "back_image", "open_profile")
 
     def get_user(self):
         return get_user_model().objects.get(username=self.cleaned_data['username'])
@@ -124,6 +125,7 @@ class CustomUserCreationForm(UserCreationForm):
 
 class CustomUserChangeForm(UserChangeForm):
     name = forms.CharField(label="이름 ", widget=forms.TextInput(attrs={'placeholder': '이름을 입력해주세요'}))
+    nickname = forms.CharField(label="닉네임 ", widget=forms.TextInput(attrs={'placeholder': '닉네임 입력해주세요'}))
     studentID = forms.IntegerField(label="학번 ",  widget=forms.TextInput(attrs={'placeholder': '20230000'}))
     birth = forms.DateField(
         label="생년월일",
@@ -151,11 +153,11 @@ class CustomUserChangeForm(UserChangeForm):
 
     class Meta(UserChangeForm.Meta):
         model = get_user_model()
-        fields = ["name", "birth", "tel", "email", "studentID",  "major1","major2", "tag", "prof_image", "back_image", "open_profile"]
+        fields = ["name", "nickname", "birth", "tel", "email", "studentID",  "major1","major2", "tag", "prof_image", "back_image", "open_profile"]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.label_suffix = ""
-        for field_name in ['password', 'password1', 'password2']:
+        for field_name in ['password', 'password1', 'password2', 'email']:
             if field_name in self.fields:
                 del self.fields[field_name]

@@ -91,6 +91,9 @@ class List(ListView):
     ordering = '-pk'
     template_name = 'list.html'
 
+    def get_queryset(self):
+        return self.model.objects.filter(open_profile=True)
+
 
 class Mypage(LoginRequiredMixin, DetailView):
     model = User
