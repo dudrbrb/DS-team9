@@ -5,7 +5,7 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin   # 로그인 한 사람만 접근 가능하게 하는 LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
-from .forms import CustomUserCreationForm, CustomUserChangeForm
+from .forms import CustomUserCreationForm, CustomUserChangeForm, CustomAuthenticationForm
 from .models import Post, Major1, Major2, Tag, User
 from django.contrib.auth import get_user_model
 
@@ -21,6 +21,7 @@ def signup(request):
 
             auth_login(request, form.get_user())
             return redirect("/")
+        
     else:
         form = CustomUserCreationForm()
 
@@ -30,13 +31,13 @@ def signup(request):
 
 def login(request):
     if request.method == "POST":
-        form = AuthenticationForm(request, request.POST)
+        form = CustomAuthenticationForm(request, request.POST)
         if form.is_valid():
             auth_login(request, form.get_user())
             return redirect("/")
         
     else:
-        form = AuthenticationForm()
+        form = CustomAuthenticationForm()
 
     context = {'form' : form}
     return render(request, 'accounts/login.html', context)

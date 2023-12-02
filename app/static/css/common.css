@@ -22,19 +22,69 @@ h1, h2, h3, h4, h5, h6{
 a{
     color: #333;
 }
-input, select{
+label{
+    min-width: 130px;
+}
+input, select,
+input[type='date']{
     background: #FFF;
     border: 2px solid #cacaca;
     border-radius: 10px;
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
     height: 40px;
+    min-width: 270px;
+    padding: 0 10px !important;
 }
 input:focus, select:focus{
     border-color: #FF176A ;
 }
-button{
+
+
+form p{
+    display: flex;
+    flex-direction: column;
+}
+
+form input,
+form select,
+form input[type='date']{
+    width: 100%;
+    height: 50px;
+    box-shadow: none;
+    margin-top: 8px;
+}
+
+form  input[type='checkbox']{
+    box-shadow: none;
+    min-width: 15px;
+    min-height: 15px;
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+    padding: 0 !important;
+}
+form  input[type='file']{
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+    padding: 0 !important;
+}
+
+#id_tag {
+    display: flex;
+    flex-wrap: wrap;
+}
+#id_tag div{
+    width: 33%;
+}
+#id_tag label{
+    display: flex;
+    align-items: center; 
+}
+button, input[type='submit']{
     padding: 0 15px;
-    border-radius: 10px;
+    border-radius: 10px !important;
+    text-align: center;
     height: 40px;
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
 }
@@ -42,8 +92,16 @@ button{
 button.pink{
     color: #fff;
     background-color: #FF176A;
+    border-color: #FF176A;
 }
-
+.acc-btn{
+    box-shadow: none ;
+    margin: 30px auto 15px ;
+    width: 300px ;
+    height: 60px ;
+    display: block !important;
+    font-size: 20px ;
+}
 .center{
     display: flex;
     justify-content: center;
@@ -75,4 +133,11 @@ button.pink{
 }
 .text-pink{
     color: #FF176A;
+}
+.errorlist.nonfield{
+    padding: 0;
+}
+.errorlist.nonfield li{
+    font-size: 14px;
+    color: #ff1717;
 }

@@ -5,7 +5,11 @@
 <form method="post" action="{% url 'app:login' %}">
     {% csrf_token %}
     {{ form.as_p}}
-    <button type="submit" class="btn btn-primary">로그인</button>
+    <button type="submit" class="pink acc-btn">로그인</button>
 </form>
-
+<div class="mt-5 ">
+    <a href="/accounts/signup">
+        <u class="underline text-sm">계정이 없으신가요?</u>
+    </a>
+</div>
 {% endblock %}
