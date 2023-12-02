@@ -1,7 +1,31 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm, UsernameField
 from django.contrib.auth import get_user_model
 from .models import Tag
+
+
+class CustomAuthenticationForm(AuthenticationForm):
+    username = UsernameField(
+        max_length=254,
+        widget=forms.TextInput(attrs={'autofocus': True}),
+        label='ID '  # 한글 레이블로 변경
+    )
+    password = forms.CharField(
+        label='비밀번호 ',  # 한글 레이블로 변경
+        strip=False,
+        widget=forms.PasswordInput,
+    )
+
+    error_messages = {
+        'invalid_login': (
+            "ID와 비밀번호를 정확히 입력해주세요."
+        ),
+        'inactive': ("비활성화된 계정입니다."),
+    }
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.label_suffix = "" 
+
 
 major = [
     ('선택', '선택'),
@@ -54,21 +78,20 @@ class DateInput(forms.DateInput):
     input_type = 'date'
 
 class CustomUserCreationForm(UserCreationForm):
-    name = forms.CharField(label="이름", widget=forms.TextInput(attrs={'placeholder': '본명을 입력해주세요'}))
-    username = forms.CharField(label="ID", widget=forms.TextInput(attrs={'placeholder': '로그인 시 사용할 ID를 입력해주세요'}))
-    password1 = forms.CharField(label="비밀번호", widget=forms.TextInput(attrs={'placeholder': '로그인 시 사용할 비밀번호를 입력하세요', 'type':'password'}))
-    password2 = forms.CharField(label="비밀번호 확인", widget=forms.TextInput(attrs={'placeholder': '비밀번호 확인을 위해 입력해주세요', 'type':'password'}))
-    email = forms.EmailField(label="이메일", widget=forms.TextInput(attrs={'placeholder': 'duksae@duksung.ac.kr'}))
-    studentID = forms.IntegerField(label="학번",  widget=forms.TextInput(attrs={'placeholder': '20230000'}))
-    birth = forms.DateField(label="생년월일", widget=DateInput)
-    tel = forms.CharField(label="연락처",  widget=forms.TextInput(attrs={'placeholder': '010-XXXX-XXXX'}))
-    major1 = forms.ChoiceField(label="제1전공", choices=major)
-    major2 = forms.ChoiceField(label="제2전공", choices=major)
-    # hash = forms.ModelMultipleChoiceField(label="취향 선택 ",queryset=Tag.objects.filter(project=1),widget=forms.SelectMultiple())
+    name = forms.CharField(label="이름 ", widget=forms.TextInput(attrs={'placeholder': '이름을 입력해주세요'}))
+    username = forms.CharField(label="ID" , widget=forms.TextInput(attrs={'placeholder': 'ID를 입력해주세요'}))
+    password1 = forms.CharField(label="비밀번호 ", widget=forms.TextInput(attrs={'placeholder': '비밀번호를 입력하세요', 'type':'password'}))
+    password2 = forms.CharField(label="비밀번호 확인 ", widget=forms.TextInput(attrs={'placeholder': '비밀번호 확인', 'type':'password'}))
+    email = forms.EmailField(label="이메일 ", widget=forms.TextInput(attrs={'placeholder': 'duksae@duksung.ac.kr'}))
+    studentID = forms.IntegerField(label="학번 ",  widget=forms.TextInput(attrs={'placeholder': '20230000'}))
+    birth = forms.DateField(label="생년월일 ", widget=DateInput(attrs={'placeholder': '2000-01-01'}))
+    tel = forms.CharField(label="연락처 ",  widget=forms.TextInput(attrs={'placeholder': '010-XXXX-XXXX'}))
+    major1 = forms.ChoiceField(label="제1전공 ", choices=major)
+    major2 = forms.ChoiceField(label="제2전공 ", choices=major)
     tag = forms.ModelMultipleChoiceField(
+        label='나를 표현하는 해시태그 ',
         queryset=Tag.objects.all(),
         widget=forms.CheckboxSelectMultiple(),
-        required=False  # Optional, depending on your requirements
     )
     prof_image = forms.ImageField(
         label="프로필 이미지",
@@ -78,18 +101,44 @@ class CustomUserCreationForm(UserCreationForm):
         label="배경 이미지",
         widget=forms.FileInput()
     )
-    # create_at = forms.DateTimeField(auto_now_add=True)
-    # update_at = forms.DateTimeField(auto_now=True)
-    open_profile = forms.BooleanField(label="프로필 공개 여부", required=False)
-
+    open_profile = forms.BooleanField(label="프로필 공개 여부 ", required=False)
+    
     class Meta(UserCreationForm.Meta):
         model = get_user_model()
         fields = ("name", "username", "password1", "password2","birth", "tel", "email", "studentID",  "major1","major2", "tag", "prof_image", "back_image", "open_profile")
 
     def get_user(self):
         return get_user_model().objects.get(username=self.cleaned_data['username'])
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.label_suffix = ""
 
 class CustomUserChangeForm(UserChangeForm):
+    name = forms.CharField(label="이름 ", widget=forms.TextInput(attrs={'placeholder': '이름을 입력해주세요'}))
+    studentID = forms.IntegerField(label="학번 ",  widget=forms.TextInput(attrs={'placeholder': '20230000'}))
+    birth = forms.DateField(label="생년월일 ", widget=DateInput(attrs={'placeholder': '2000-01-01'}))
+    tel = forms.CharField(label="연락처 ",  widget=forms.TextInput(attrs={'placeholder': '010-XXXX-XXXX'}))
+    major1 = forms.ChoiceField(label="제1전공 ", choices=major)
+    major2 = forms.ChoiceField(label="제2전공 ", choices=major)
+    tag = forms.ModelMultipleChoiceField(
+        label='나를 표현하는 해시태그 ',
+        queryset=Tag.objects.all(),
+        widget=forms.CheckboxSelectMultiple(),
+    )
+    prof_image = forms.ImageField(
+        label="프로필 이미지",
+        widget=forms.FileInput()
+    )
+    back_image = forms.ImageField(
+        label="배경 이미지",
+        widget=forms.FileInput()
+    )
+
+    open_profile = forms.BooleanField(label="프로필 공개 여부 ", required=False)
     class Meta(UserChangeForm.Meta):
         model = get_user_model()
-
+        fields = ("name", "birth", "tel", "email", "studentID",  "major1","major2", "tag", "prof_image", "back_image", "open_profile")
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.label_suffix = ""

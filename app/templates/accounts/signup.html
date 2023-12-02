@@ -6,7 +6,7 @@
     <form method="post" action="{% url 'app:signup' %}" enctype="multipart/form-data">
         {% csrf_token %}
         {{form.as_p}}
-        <button type="submit" class="btn btn-primary">생성하기</button>
+        <button type="submit" class="pink acc-btn">생성하기</button>
     </form>
 </div>
 
