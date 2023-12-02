@@ -44,6 +44,9 @@ form p{
     display: flex;
     flex-direction: column;
 }
+form p:last-child{
+    flex-direction: row !important;
+}
 
 form input,
 form select,
@@ -81,6 +84,7 @@ form  input[type='file']{
     display: flex;
     align-items: center; 
 }
+
 button, input[type='submit']{
     padding: 0 15px;
     border-radius: 10px !important;

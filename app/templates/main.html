@@ -93,8 +93,8 @@
                                     함께 공부하고싶어!
                                 </div>
                                 <div class="talk-pink">
-                                    홍대에 파스타 맛집이 있대!<br>
-                                    같이 먹으러 가면 좋겠어!
+                                    난 중국음식 매니아인데, 같이 <br>
+                                    먹으러 갈 친구가 있으면 좋겠어!
                                 </div>
                                 <div class="talk-pink">
                                     닌텐도 같이 할 사람 ~ !<br>
@@ -136,7 +136,7 @@
                                 </div>
                                 <div class="p-3 flex flex-col justify-between h-auto">
                                     <p class="text-lg">
-                                        입력한 정보를 바탕으로 가장 많은 키워드가
+                                        내 정보를 바탕으로 가장 많은 키워드가
                                         겹치는 친구를 찾아서 매칭해줘요!
                                     </p>
                                     <a href="/mypage" class="text-[#FF176A] hover:text-[#FF176A]">바로가기  →</a>
@@ -177,9 +177,9 @@
                                         <div class="card p-0 mb-5">
                                             <div class="h-[200px] overflow-hidden flex justify-center items-center">
                                                 {% if m.back_image %}
-                                                    <img class="card-img-top" src="{{ m.back_image.url }}" alt="random image">
+                                                    <img class="card-img-top" src="{{ m.back_image.url }}" alt="default image">
                                                 {% else %}
-                                                    <img class="card-img-top" src="https://picsum.photos/seed/{{ p.userName }}/800/200" alt="random image">
+                                                    <img class="card-img-top" src="{% static 'images/profile/back.png' %}" alt="default image">
                                                 {% endif %}
                                             </div>
                                     
@@ -189,7 +189,7 @@
                                                 {% if m.prof_image %}
                                                     <img src="{{ m.prof_image.url }}" alt="프로필 사진" class="w-[50px] h-[50px] mr-3"> 
                                                 {% else %}
-                                                    <img class="card-img-top" src="https://picsum.photos/seed/{{ m.username }}/800/200" alt="random image">
+                                                    <img class="card-img-top" src="{% static 'images/profile/prof.png' %}" alt="default image">
                                                 {% endif %}
                                                 {{ m.name }}
                                             </h5>

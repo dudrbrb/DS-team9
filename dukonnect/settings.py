@@ -144,3 +144,4 @@ LOGOUT_REDIRECT_URL = "/"
 
 # Custom User
 AUTH_USER_MODEL = 'app.User'
+DATE_INPUT_FORMATS = ['%Y-%m-%d']
