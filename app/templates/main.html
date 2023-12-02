@@ -126,7 +126,7 @@
                                     <p class="text-lg">
                                         나에 대한 전공과 취향을 입력하고 만나고 싶은 친구의 전공과 취향도 함께 입력해요!
                                     </p>
-                                    <a href="/join" class="text-[#FF176A] hover:text-[#FF176A]">바로가기  →</a>
+                                    <a href="/signup" class="text-[#FF176A] hover:text-[#FF176A]">바로가기  →</a>
                                 </div>
                             </div>
                             <div class="card p-0 w-[31%]">
@@ -179,17 +179,21 @@
                                                 {% if m.back_image %}
                                                     <img class="card-img-top" src="{{ m.back_image.url }}" alt="random image">
                                                 {% else %}
-                                                    <img class="card-img-top" src="https://picsum.photos/seed/{{ p.id }}/800/200" alt="random image">
+                                                    <img class="card-img-top" src="https://picsum.photos/seed/{{ p.userName }}/800/200" alt="random image">
                                                 {% endif %}
                                             </div>
                                     
                                             
                                             <div class="card-body h-[200px]">
                                               <h5 class="card-title flex  items-center"> 
-                                                <img src="{{ m.prof_image.url }}" alt="프로필 사진" class="w-[50px] h-[50px] mr-3"> 
-                                                {{ m.member_name }}
+                                                {% if m.prof_image %}
+                                                    <img src="{{ m.prof_image.url }}" alt="프로필 사진" class="w-[50px] h-[50px] mr-3"> 
+                                                {% else %}
+                                                    <img class="card-img-top" src="https://picsum.photos/seed/{{ m.username }}/800/200" alt="random image">
+                                                {% endif %}
+                                                {{ m.name }}
                                             </h5>
-                                              <p class="card-text">{{ m.member_major_1 }} | {{ m.member_major_2 }}</p>
+                                              <p class="card-text">{{ m.major_1 }} | {{ m.major_2 }}</p>
                                               <span class="bg-pink rounded-2xl px-3 py-1 text-white break-keep inline-block" >#해쉬태그</span>
                                               <span class="bg-pink rounded-2xl px-3 py-1 text-white break-keep inline-block" >#해쉬태그</span>
                                               <span class="bg-pink rounded-2xl px-3 py-1 text-white break-keep inline-block" >#해쉬태그</span>

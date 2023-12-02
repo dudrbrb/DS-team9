@@ -1,6 +1,5 @@
 from django.db import models
-from django.contrib.postgres.fields import ArrayField
-
+from django.contrib.auth.models import AbstractUser
 
 class Major1(models.Model):
     name = models.CharField(max_length=20)
@@ -8,15 +7,9 @@ class Major1(models.Model):
 
     def __str__(self):
         return self.name
-    
-    def get_absolute_url(self):
-        return f'/list/major/{self.slug}/'
-    
 
 class Major2(Major1):
     pass
-    
-
 
 class Tag(models.Model):
     name = models.CharField(max_length=50)
@@ -24,68 +17,84 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.name
-    
-    def get_absolute_url(self):
-        return f'/list/tag/{self.slug}/'
-    
 
-class Member(models.Model):
-    # DB col을 생성
-    # 회원 이름
-    member_name = models.CharField(max_length=10)
+class User(AbstractUser):
+    major = [
+        ('국어국문학전공', '국어국문학전공'),
+        ('일어일문학전공', '일어일문학전공'),
+        ('중어중문학전공', '중어중문학전공'),
+        ('영어영문학전공', '영어영문학전공'),
+        ('불어불문학전공', '불어불문학전공'),
+        ('독어독문학전공', '독어독문학전공'),
+        ('스페인어전공', '스페인어전공'),
+        ('사학전공', '사학전공'),
+        ('철학전공', '철학전공'),
+        ('미술사학전공', '미술사학전공'),
+        ('경영학전공', '경영학전공'),
+        ('회계학전공', '회계학전공'),
+        ('국제통상학전공', '국제통상학전공'),
+        ('법학전공', '법학전공'),
+        ('문헌정보학전공', '문헌정보학전공'),
+        ('사회학전공', '사회학전공'),
+        ('심리학전공', '심리학전공'),
+        ('아동가족학전공', '아동가족학전공'),
+        ('사회복지학전공', '사회복지학전공'),
+        ('정치외교학전공', '정치외교학전공'),
+        ('의상디자인전공', '의상디자인전공'),
+        ('유아교육과', '유아교육과'),
+        ('디지털소프트웨어공학부', '디지털소프트웨어공학부'),
+        ('컴퓨터공학전공', '컴퓨터공학전공'),
+        ('IT미디어공학전공', 'IT미디어공학전공'),
+        ('사이버보안전공', '사이버보안전공'),
+        ('소프트웨어전공', '소프트웨어전공'),
+        ('바이오공학전공', '바이오공학전공'),
+        ('수학전공', '수학전공'),
+        ('정보통계학전공', '정보통계학전공'),
+        ('화학전공', '화학전공'),
+        ('식품영양학전공', '식품영양학전공'),
+        ('생활체육학전공', '생활체육학전공'),
+        ('동양화전공', '동양화전공'),
+        ('서양화전공', '서양화전공'),
+        ('실내디자인전공', '실내디자인전공'),
+        ('시각디자인전공', '시각디자인전공'),
+        ('텍스타일디자인전공', '텍스타일디자인전공'),
+        ('한국학전공', '한국학전공'),
+        ('한국어교육전공', '한국어교육전공'),
+        ('가상현실융합학과', '가상현실융합학과'),
+        ('데이터사이언스학과', '데이터사이언스학과'),
+    ]
 
-    # 회원 아이디
-    member_id = models.CharField(max_length=20)
 
-    # 회원 비밀번호
-    member_password = models.IntegerField()
-
-    # 회원 생년월일
-    member_birthday = models.IntegerField()
-
-    # 회원 학번
-    member_studentNumber = models.IntegerField()
-
-    # 회원의 제1전공 ManyToManyField 사용
-    member_major_1 = models.ManyToManyField(Major1, related_name='+')
- 
-    # 회원의 제2전공
-    member_major_2 = models.ManyToManyField(Major2, related_name='+')
-
-    # 회원 취향 해시 목록
-    member_hash = models.ManyToManyField(Tag, blank=True)
-
-
-    # 회원과 매칭된 회원(pk) 목록
-    
-    member_friends = models.TextField(blank=True)
-
-    # 회원을 like한 회원(pk) 목록
-    member_liked = models.TextField(blank=True)
-
-    # 회원이 like한 회원(pk) 목록
-    member_like = models.TextField(blank=True)
-
-    # 회원 공개구친 여부
-    member_open = models.BooleanField()
-
-    # 프로필 이미지
+    name = models.CharField(max_length=20, name="name")
+    studentID = models.IntegerField(name="studentID")
+    birth = models.DateField(null=True, name="birth")
+    tel = models.CharField(max_length=20, name="tel")
+    major1 = models.CharField(max_length=20, choices=major)
+    major2 = models.CharField(max_length=20, choices=major, null=True)
+    tag = models.ManyToManyField(Tag, blank=True)
+    open_profile = models.BooleanField()
     prof_image = models.ImageField(upload_to='images/profile/%Y/%m/%d/', blank=True)
-    
-    # 배경 이미지
     back_image = models.ImageField(upload_to='images/background/%Y/%m/%d/', blank=True)
+    
+    friends = models.TextField(blank=True)
+    liked = models.TextField(blank=True)
+    like = models.TextField(blank=True)
 
-
-    # 데이터 생성 시 현재 시간 자동 기입 True
     create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+    
+    REQUIRED_FIELDS = ['name', 'studentID', 'birth', 'tel', 'open_profile']
 
-    # 데이터 수정 시 수정 시간 자동 기입
+class Post(models.Model):
+    title = models.CharField(max_length=30)
+    content = models.TextField()
+    tag = models.ManyToManyField(Tag, blank=True)
+    author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
-    # admin에서 표시될 제목
     def __str__(self):
-        return f'[{self.pk}] {self.member_name} ({self.member_id})'
-    
-    # 상세페이지 링크 (마이페이지)
+        return f'[{self.pk}]{self.title} :: {self.author}'
+
     def get_absolute_url(self):
-        return f'/mypage/{self.pk}/'
+        return f'/list/{self.pk}/'
