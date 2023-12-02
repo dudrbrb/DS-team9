@@ -10,7 +10,7 @@ class CustomUserAdmin(UserAdmin):
 
     # 유저 정보 관리 페이지 정보 입력창 추가
     fieldsets = UserAdmin.fieldsets + (
-        (None, {'fields':  ("name", "nickname", "birth", "tel", "studentID",  "major1","major2", "tag", "prof_image", "back_image", "open_profile",)}),
+        (None, {'fields':  ("name", "nickname", "birth", "tel", "studentID",  "major1","major2", "tag", "prof_image", "back_image", "open_profile", 'friends', 'like', 'liked')}),
         )
 
 
