@@ -1,4 +1,4 @@
-{% extends 'module/base.html' %}
+{% extends 'module/sm_base.html' %}
 {% block title %}내 정보 수정{% endblock %}
 
 {% block content %}
@@ -7,7 +7,7 @@
         {% csrf_token %}
         {{form.as_p}}
 
-        <button type="submit" class="bg-[#FF176A] text-white px-3 rounded mt-4 inline-block mr-1">수정하기</button>
+        <button type="submit" class="pink acc-btn">수정하기</button>
         
       </div>
     </form>

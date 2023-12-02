@@ -73,6 +73,10 @@ major = [
     ('데이터사이언스학과', '데이터사이언스학과'),
 ]
 
+openBool = [
+    (True, '공개'),
+    (False, '비공개'),
+]
 
 class DateInput(forms.DateInput):
     input_type = 'date'
@@ -84,7 +88,11 @@ class CustomUserCreationForm(UserCreationForm):
     password2 = forms.CharField(label="비밀번호 확인 ", widget=forms.TextInput(attrs={'placeholder': '비밀번호 확인', 'type':'password'}))
     email = forms.EmailField(label="이메일 ", widget=forms.TextInput(attrs={'placeholder': 'duksae@duksung.ac.kr'}))
     studentID = forms.IntegerField(label="학번 ",  widget=forms.TextInput(attrs={'placeholder': '20230000'}))
-    birth = forms.DateField(label="생년월일 ", widget=DateInput(attrs={'placeholder': '2000-01-01'}))
+    birth = forms.DateField(
+        label="생년월일",
+        widget=DateInput(attrs={'placeholder': '2000-01-01'}),
+        input_formats=['%Y-%m-%d']
+     )
     tel = forms.CharField(label="연락처 ",  widget=forms.TextInput(attrs={'placeholder': '010-XXXX-XXXX'}))
     major1 = forms.ChoiceField(label="제1전공 ", choices=major)
     major2 = forms.ChoiceField(label="제2전공 ", choices=major)
@@ -101,7 +109,7 @@ class CustomUserCreationForm(UserCreationForm):
         label="배경 이미지",
         widget=forms.FileInput()
     )
-    open_profile = forms.BooleanField(label="프로필 공개 여부 ", required=False)
+    open_profile = forms.ChoiceField(label="프로필 공개 여부 ", choices=openBool)
     
     class Meta(UserCreationForm.Meta):
         model = get_user_model()
@@ -117,7 +125,11 @@ class CustomUserCreationForm(UserCreationForm):
 class CustomUserChangeForm(UserChangeForm):
     name = forms.CharField(label="이름 ", widget=forms.TextInput(attrs={'placeholder': '이름을 입력해주세요'}))
     studentID = forms.IntegerField(label="학번 ",  widget=forms.TextInput(attrs={'placeholder': '20230000'}))
-    birth = forms.DateField(label="생년월일 ", widget=DateInput(attrs={'placeholder': '2000-01-01'}))
+    birth = forms.DateField(
+        label="생년월일",
+        widget=DateInput(attrs={'placeholder': '2000-01-01'}),
+        input_formats=['%Y-%m-%d']
+    )
     tel = forms.CharField(label="연락처 ",  widget=forms.TextInput(attrs={'placeholder': '010-XXXX-XXXX'}))
     major1 = forms.ChoiceField(label="제1전공 ", choices=major)
     major2 = forms.ChoiceField(label="제2전공 ", choices=major)
@@ -135,10 +147,15 @@ class CustomUserChangeForm(UserChangeForm):
         widget=forms.FileInput()
     )
 
-    open_profile = forms.BooleanField(label="프로필 공개 여부 ", required=False)
+    open_profile = forms.ChoiceField(label="프로필 공개 여부 ", choices=openBool)
+
     class Meta(UserChangeForm.Meta):
         model = get_user_model()
-        fields = ("name", "birth", "tel", "email", "studentID",  "major1","major2", "tag", "prof_image", "back_image", "open_profile")
+        fields = ["name", "birth", "tel", "email", "studentID",  "major1","major2", "tag", "prof_image", "back_image", "open_profile"]
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.label_suffix = ""
+        for field_name in ['password', 'password1', 'password2']:
+            if field_name in self.fields:
+                del self.fields[field_name]

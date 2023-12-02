@@ -15,6 +15,7 @@ def signup(request):
         form = CustomUserCreationForm(request.POST, request.FILES)
         if form.is_valid():
             user = form.save(commit=False)  # 인스턴스를 바로 저장하지 않음
+            user.tag.set(form.cleaned_data['tag'])
             user.prof_image = form.cleaned_data['prof_image']
             user.back_image = form.cleaned_data['back_image']
             user.save()
@@ -56,7 +57,11 @@ def update(request):
     if request.method == "POST":
         form = CustomUserChangeForm(request.POST,instance=request.user)
         if form.is_valid():
-            form.save()
+            user = form.save(commit=False)  # 인스턴스를 바로 저장하지 않음
+            user.tag.set(form.cleaned_data['tag'])
+            user.prof_image = form.cleaned_data['prof_image']
+            user.back_image = form.cleaned_data['back_image']
+            user.save()
             return redirect("/mypage")
         
     else:

@@ -8,9 +8,9 @@
     <div class="border-1 p-0 mb-5 w-[32%] rounded overflow-hidden">
       <div class="h-[200px] overflow-hidden flex justify-center items-center">
           {% if m.back_image %}
-              <img class="card-img-top" src="{{ m.back_image.url }}" alt="random image">
+              <img class="card-img-top" src="{{ m.back_image.url }}" alt="default image">
           {% else %}
-              <img class="card-img-top" src="https://picsum.photos/seed/{{ m.username }}/800/200" alt="random image">
+              <img class="card-img-top" src="{% static 'images/profile/back.png' %}" alt="default image">
           {% endif %}
         </div>
         
@@ -20,7 +20,7 @@
           {% if m.prof_image %}
             <img src="{{ m.prof_image.url }}" alt="프로필 사진" class="w-[50px] h-[50px] mr-3"> 
           {% else %}
-              <img class="card-img-top" src="https://picsum.photos/seed/{{ m.username }}/800/200" alt="random image">
+              <img class="card-img-top" src="{% static 'images/profile/prof.png' %}" alt="default image">
           {% endif %}
           {{ m.name }}
       </h5>

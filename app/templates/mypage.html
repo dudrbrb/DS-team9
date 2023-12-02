@@ -1,25 +1,73 @@
-{% extends 'module/base.html' %}
-{% load crispy_forms_tags static %}
-
+{% extends 'module/sm_base.html' %}
+{% load static %}
 {% block title %}내 정보{% endblock %}
-
 {% block content %}
-    <!-- css load -->
-    <link rel="stylesheet" href="{% static 'css/mypage.css' %}" media="screen">
-    <ul>
-        <li><strong>사용자 이름:</strong> {{ object.username }}</li>
-        <li><strong>이메일:</strong> {{ object.email }}</li>
-        <li><strong>이름:</strong> {{ object.first_name }}</li>
-        <li><strong>성:</strong> {{ object.last_name }}</li>
-        <!-- 다른 필드를 추가하려면 여기에 추가하십시오 -->
-    </ul>
+    <div class="w-full h-[200px] overflow-hidden">
+        {% if object.back_image %}
+            <img src="{{ object.back_image.url }}" alt="배경 사진" class="w-full "> 
+        {% else %}
+            <img src="{% static 'images/profile/back.png' %}"  class="w-full ">
+        {% endif %}
+    </div>
 
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <!-- crispy 템플릿 태그 삭제 -->
-        <div class="flex">
-            <button type="submit" class="bg-[#FF176A] text-white px-3 rounded mt-4 inline-block mr-1">수정하기</button>
-            <button type="submit" class="bg-[#FF176A] text-white px-3 rounded mt-4 inline-block">탈퇴하기</button>
-        </div>
-    </form>
+
+    {% if object.prof_image %}
+        <img src="{{ object.prof_image.url }}" alt="프로필 사진" class="w-40 h-40 block mt-[-7rem] mx-auto"> 
+    {% else %}
+        <img src="{% static 'images/profile/prof.png' %}" class="w-40 h-40 block mt-[-7rem] mx-auto" >
+    {% endif %}
+    <div class="info">
+        <ul class="p-0">
+            <li class="flex min-h-[1.75rem]">
+                <b class="min-w-[110px] block">이름</b>
+                {{ object.name }}
+            </li>
+            <li class="flex min-h-[1.75rem]">
+                <b class="min-w-[110px] block">계정</b> 
+                {{ object.username }} ({{ object.email }})
+            </li>
+            <li class="flex min-h-[1.75rem]">
+                <b class="min-w-[110px] block">제1전공</b>
+                {{ object.major1 }}
+            </li>
+            <li class="flex min-h-[1.75rem]">
+                <b class="min-w-[110px] block">제2전공</b>
+                {{ object.major2 }}
+            </li>
+            <li class="flex min-h-[1.75rem]">
+                <b class="min-w-[110px] block">생년월일</b>
+                {{ object.birth | date:"Y-m-d"  }}
+            </li>
+            <li class="flex min-h-[1.75rem]">
+                <b class="min-w-[110px] block">연락처</b>
+                {{ object.tel }}
+            </li>
+            <li class="flex min-h-[1.75rem]">
+                <b class="min-w-[110px] block">해시태그</b>
+                <ul class="p-0 flex flex-wrap">
+                    {% for t in object.tag.all %}
+                    <li class="bg-slate-100 block rounded-3xl mr-2 px-2 py-1 mb-1">#{{t.name}}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+            <li class="flex min-h-[1.75rem]">
+                <b class="min-w-[110px] block">프로필 공개</b>
+                {% if object.open_profile %}
+                공개 중
+                {% else %}
+                비공개
+                {% endif%}
+            </li>
+        </ul>
+    </div>
+
+    <div class="flex justify-between">
+        <a href="/accounts/update" class="w-[48%] block">
+            <button class="pink px-3 rounded mt-4 inline-block mr-1 w-full h-[50px]">수정하기</button>
+        </a>
+        <a href="/accounts/update" class="w-[48%] block">
+            <button class="pink px-3 rounded mt-4 inline-block w-full h-[50px]">탈퇴하기</button>
+        </a>
+    </div>
+ 
 {% endblock %}
