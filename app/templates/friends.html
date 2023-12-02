@@ -14,15 +14,15 @@
 
           <div class="flex-auto">
             <p class="text-lg font-semibold text-gray-900 mb-1">
-              {{m.member_name}}
+              {{m.name}}
             </p>
             <p class="mb-2">
-              {{m.member_major_1}} |  {{m.member_major_2}} <br>
-              {{m.member_birthday}}<br>
+              {{m.major_1}} |  {{m.major_2}} <br>
+              {{m.birthday}}<br>
               
             </p>
-            {% if m.member_hash.exists %}
-              {% for tag in m.member_hash.iterator %}
+            {% if m.hash.exists %}
+              {% for tag in m.hash.iterator %}
                 <span class="bg-pink rounded-2xl px-3 py-1 text-white break-keep inline-block mt-1 mr-1">{{tag}}</span>
               {% endfor %}
             {% endif %}

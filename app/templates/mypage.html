@@ -1,21 +1,25 @@
 {% extends 'module/base.html' %}
 {% load crispy_forms_tags static %}
-<!-- {% load static %} -->
-{% block title %}마이페이지{% endblock %}
+
+{% block title %}내 정보{% endblock %}
 
 {% block content %}
     <!-- css load -->
     <link rel="stylesheet" href="{% static 'css/mypage.css' %}" media="screen">
+    <ul>
+        <li><strong>사용자 이름:</strong> {{ object.username }}</li>
+        <li><strong>이메일:</strong> {{ object.email }}</li>
+        <li><strong>이름:</strong> {{ object.first_name }}</li>
+        <li><strong>성:</strong> {{ object.last_name }}</li>
+        <!-- 다른 필드를 추가하려면 여기에 추가하십시오 -->
+    </ul>
 
     <form method="post" enctype="multipart/form-data">
-
         {% csrf_token %}
-        {% crispy form %}
-
+        <!-- crispy 템플릿 태그 삭제 -->
         <div class="flex">
-          <button type="submit" class="bg-[#FF176A] text-white px-3 rounded mt-4 inline-block mr-1">수정하기</button>
-          <button type="submit" class="bg-[#FF176A] text-white px-3 rounded mt-4 inline-block">탈퇴하기</button>
+            <button type="submit" class="bg-[#FF176A] text-white px-3 rounded mt-4 inline-block mr-1">수정하기</button>
+            <button type="submit" class="bg-[#FF176A] text-white px-3 rounded mt-4 inline-block">탈퇴하기</button>
         </div>
-      </div>
     </form>
 {% endblock %}

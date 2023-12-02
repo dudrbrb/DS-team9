@@ -1,0 +1,13 @@
+{% extends 'module/sm_base.html' %}
+{% block title %}회원가입{% endblock %}
+
+{% block content %}
+<div class="container my-3">
+    <form method="post" action="{% url 'app:signup' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-primary">생성하기</button>
+    </form>
+</div>
+
+{% endblock %}
