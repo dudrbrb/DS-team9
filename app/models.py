@@ -66,6 +66,7 @@ class User(AbstractUser):
 
 
     name = models.CharField(max_length=20, name="name")
+    nickname = models.CharField(max_length=20, name="nickname", null=True)
     studentID = models.IntegerField(name="studentID")
     birth = models.DateField(null=True, name="birth")
     tel = models.CharField(max_length=20, name="tel")

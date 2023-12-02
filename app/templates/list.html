@@ -1,5 +1,5 @@
 {% extends 'module/base.html' %}
-
+{% load static %}
 {% block title %}공개구벗{% endblock %}
 
 {% block content %}
@@ -15,22 +15,23 @@
         </div>
         
         
-        <div class="h-[300px] p-3">
+        <div class="min-h-[300px] p-3">
           <h5 class="flex  items-center"> 
           {% if m.prof_image %}
             <img src="{{ m.prof_image.url }}" alt="프로필 사진" class="w-[50px] h-[50px] mr-3"> 
           {% else %}
               <img class="card-img-top" src="{% static 'images/profile/prof.png' %}" alt="default image">
           {% endif %}
-          {{ m.name }}
+          {{ m.nickname }}
       </h5>
         <p class="card-text">{{ m.major1 }} | {{ m.major2 }}</p>
-        {% if m.hash.exists %}
-          {% for t in m.tag.iterator %}
-            <span class="bg-pink rounded-2xl px-3 py-1 text-white break-keep inline-block mt-1 mr-1">{{t}}</span>
-          {% endfor %}
-        {% endif %}
+        {% for t in m.tag.all %}
+        <div class="bg-slate-100 rounded-2xl px-3 py-1 break-keep inline-block mt-1 mr-1 text-sm">#{{t.name}}</div>
+        {% endfor %}
 
+        <div>
+          <button class="pink px-2 block mt-5 px-3">친구하기</button>
+        </div>
       </div>
     </div>
     {% endfor %}

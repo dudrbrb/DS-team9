@@ -16,23 +16,23 @@
     {% else %}
         <img src="{% static 'images/profile/prof.png' %}" class="w-40 h-40 block mt-[-7rem] mx-auto" >
     {% endif %}
-    <div class="info">
+    <div class="info mt-3">
         <ul class="p-0">
             <li class="flex min-h-[1.75rem]">
                 <b class="min-w-[110px] block">이름</b>
-                {{ object.name }}
+                {{ object.name }} ({{ object.studentID}})
             </li>
             <li class="flex min-h-[1.75rem]">
-                <b class="min-w-[110px] block">계정</b> 
-                {{ object.username }} ({{ object.email }})
+                <b class="min-w-[110px] block">닉네임</b> 
+                {{ object.nickname }}
             </li>
             <li class="flex min-h-[1.75rem]">
-                <b class="min-w-[110px] block">제1전공</b>
-                {{ object.major1 }}
+                <b class="min-w-[110px] block">ID</b> 
+                {{ object.username }}
             </li>
             <li class="flex min-h-[1.75rem]">
-                <b class="min-w-[110px] block">제2전공</b>
-                {{ object.major2 }}
+                <b class="min-w-[110px] block">이메일</b> 
+                {{ object.email }}
             </li>
             <li class="flex min-h-[1.75rem]">
                 <b class="min-w-[110px] block">생년월일</b>
@@ -41,6 +41,14 @@
             <li class="flex min-h-[1.75rem]">
                 <b class="min-w-[110px] block">연락처</b>
                 {{ object.tel }}
+            </li>
+            <li class="flex min-h-[1.75rem]">
+                <b class="min-w-[110px] block">제1전공</b>
+                {{ object.major1 }}
+            </li>
+            <li class="flex min-h-[1.75rem]">
+                <b class="min-w-[110px] block">제2전공</b>
+                {{ object.major2 }}
             </li>
             <li class="flex min-h-[1.75rem]">
                 <b class="min-w-[110px] block">해시태그</b>
