@@ -3,9 +3,9 @@
 {% block title %}공개구벗{% endblock %}
 
 {% block content %}
-  <div class="flex justify-between items-start flex-wrap">
+  <div class="flex justify-start items-start flex-wrap">
     {% for m in object_list %}
-    <div class="border-1 p-0 mb-5 w-[32%] rounded overflow-hidden">
+    <div class="border-1 p-0 mb-5 w-[31%] rounded overflow-hidden m-[1%]">
       <div class="h-[200px] overflow-hidden flex justify-center items-center">
           {% if m.back_image %}
               <img class="card-img-top" src="{{ m.back_image.url }}" alt="default image">
@@ -17,11 +17,13 @@
         
         <div class="min-h-[300px] p-3">
           <h5 class="flex  items-center"> 
-          {% if m.prof_image %}
-            <img src="{{ m.prof_image.url }}" alt="프로필 사진" class="w-[50px] h-[50px] mr-3"> 
-          {% else %}
-              <img class="card-img-top" src="{% static 'images/profile/prof.png' %}" alt="default image">
-          {% endif %}
+            <div class="w-[50px] h-[50px] mr-3 rounded-[50%] overflow-hidden">
+              {% if m.prof_image %}
+              <img src="{{ m.prof_image.url }}" alt="프로필 사진"  class="w-full"> 
+              {% else %}
+              <img src="{% static 'images/profile/prof.png' %}" alt="default image" class="w-full">
+              {% endif %}
+            </div>
           {{ m.nickname }}
       </h5>
         <p class="card-text">{{ m.major1 }} | {{ m.major2 }}</p>
@@ -30,7 +32,12 @@
         {% endfor %}
 
         <div>
-          <button class="pink px-2 block mt-5 px-3">친구하기</button>
+          <button class="pink px-2 block mt-5 px-3">
+            <a href="/add_friend/{{m.username}}/" class="text-white hover:text-white no-underline">
+              친구하기
+            </a>
+
+          </button>
         </div>
       </div>
     </div>

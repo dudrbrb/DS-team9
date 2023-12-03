@@ -85,7 +85,7 @@ class User(AbstractUser):
     update_at = models.DateTimeField(auto_now=True)
     
     REQUIRED_FIELDS = ['name', 'studentID', 'birth', 'tel', 'open_profile']
-
+    
 class Post(models.Model):
     title = models.CharField(max_length=30)
     content = models.TextField()

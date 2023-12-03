@@ -13,4 +13,8 @@ urlpatterns = [
     path('list/', views.List.as_view()),
     path('mypage/', views.Mypage.as_view(), name='mypage'),
     path('friends/', views.Friends.as_view()),
+    
+    path('add_friend/<str:friend_username>/', views.AddFriendView.as_view(), name='add_friend'),
+    path('remove_friend/<str:friend_username>/', views.RemoveFriendView.as_view(), name='remove_friend'),
+    path('auto_match_friends/', views.auto_match_friends, name='auto_match_friends'),
 ]
