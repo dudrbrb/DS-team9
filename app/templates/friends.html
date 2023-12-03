@@ -10,10 +10,10 @@
     {% for f in friends_users  %}
   
       <li class="flex justify-between gap-x-6 border-1 p-3 mb-2 hover:bg-gray-50 rounded">
-        <div class="flex min-w-0 gap-x-4">
+        <div class="flex min-w-0 gap-x-4 w-full">
           <img class="h-[100px] w-[100px] flex-none rounded-full bg-gray-50" src="{{ f.prof_image.url }}">
 
-          <div class="flex-auto">
+          <div class="flex-auto w-full">
             <b class="text-lg text-gray-900 mb-1 block w-full flex">
               {{f.name}} ({{f.tel }})
               <a href="/remove_friend/{{f.username}}" class="inline-block ml-auto bg-gray-100 no-underline text-[#333] hover:bg-gray-200 px-2 border-2 rounded">삭제</a>
