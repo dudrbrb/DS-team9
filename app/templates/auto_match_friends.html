@@ -1,0 +1,42 @@
+{% extends 'module/base.html' %}
+{% load static %}
+{% block title %}친구 자동 매칭 결과{% endblock %}
+
+{% block content %}
+  <div class="flex justify-start items-start flex-wrap">
+    {% for match in matched_friends %}
+      <div class="border-1 p-0 mb-5 w-[32%] rounded overflow-hidden mr-[10px]">
+        <div class="h-[200px] overflow-hidden flex justify-center items-center">
+          {% if match.friend.back_image %}
+            <img class="card-img-top" src="{{ match.friend.back_image.url }}" alt="default image">
+          {% else %}
+            <img class="card-img-top" src="{% static 'images/profile/back.png' %}" alt="default image">
+          {% endif %}
+        </div>
+
+        <div class="min-h-[300px] p-3">
+          <h5 class="flex items-center">
+            {% if match.friend.prof_image %}
+              <img src="{{ match.friend.prof_image.url }}" alt="프로필 사진" class="w-[50px] h-[50px] mr-3">
+            {% else %}
+              <img class="card-img-top" src="{% static 'images/profile/prof.png' %}" alt="default image">
+            {% endif %}
+            {{ match.friend.nickname }}
+          </h5>
+          <p class="card-text">{{ match.friend.major1 }} | {{ match.friend.major2 }}</p>
+          {% for tag in match.common_tags %}
+            <div class="bg-slate-100 rounded-2xl px-3 py-1 break-keep inline-block mt-1 mr-1 text-sm">#{{ tag.name }}</div>
+          {% endfor %}
+          <div>
+            <button class="pink px-2 block mt-5 px-3">
+              <a href="/add_friend/{{match.friend.username}}/" class="text-white hover:text-white no-underline">
+                친구하기
+              </a>
+
+            </button>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

@@ -11,11 +11,14 @@
     </div>
 
 
-    {% if object.prof_image %}
-        <img src="{{ object.prof_image.url }}" alt="프로필 사진" class="w-40 h-40 block mt-[-7rem] mx-auto"> 
-    {% else %}
-        <img src="{% static 'images/profile/prof.png' %}" class="w-40 h-40 block mt-[-7rem] mx-auto" >
-    {% endif %}
+    <div class="w-40 h-40 overflow-hidden rounded-[50%] z-1 block  mt-[-7rem] mx-auto">
+
+        {% if object.prof_image %}
+        <img src="{{ object.prof_image.url }}" alt="프로필 사진" class="w-full"> 
+        {% else %}
+        <img src="{% static 'images/profile/prof.png' %}" class="w-full" >
+        {% endif %}
+    </div>
     <div class="info mt-3">
         <ul class="p-0">
             <li class="flex min-h-[1.75rem]">
@@ -69,12 +72,14 @@
         </ul>
     </div>
 
-    <button class="pink px-3 roundedinline-block mr-1 w-full h-[50px] mt-3">친구 자동 매칭</button>
+    <button class="pink px-3 rounded mr-1 w-full h-[50px] mt-3">
+        <a href="{% url 'app:auto_match_friends' %}" class="text-white hover:text-white no-underline">친구 자동 매칭</a>
+    </button>
     <div class="flex justify-between mt-2">
         <a href="/accounts/update" class="w-[48%] block">
             <button class="bg-gray-100 text-gray-500 hover:text-gray-800 px-3 roundedinline-block mr-1 w-full h-[50px]">수정하기</button>
         </a>
-        <a href="/accounts/update" class="w-[48%] block">
+        <a href="/accounts/delete" class="w-[48%] block">
             <button class="bg-gray-100 text-gray-500 hover:text-gray-800 px-3 roundedinline-block w-full h-[50px]">탈퇴하기</button>
         </a>
     </div>
