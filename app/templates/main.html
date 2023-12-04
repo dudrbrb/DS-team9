@@ -56,7 +56,7 @@
                                 <div class="border-1 h-full "></div>
                                 <li>
                                     <b >STEP2</b>
-                                    <p>[내 친구]에서 [1:1 매칭 시작하기]를 선택해요. 매칭이 완료되면 서로의 전화번호가 공유돼요.</p>
+                                    <p>[내 친구]에서 [자동 매칭 시작하기]를 선택해요. 매칭이 완료되면 서로의 전화번호가 공유돼요.</p>
                                 </li>
                                 <div class="border-1 h-full "></div>
                                 <li>
@@ -126,20 +126,28 @@
                                     <p class="text-lg">
                                         나에 대한 전공과 취향을 입력하고 만나고 싶은 친구의 전공과 취향도 함께 입력해요!
                                     </p>
-                                    <a href="/signup" class="text-[#FF176A] hover:text-[#FF176A]">바로가기  →</a>
+                                    {% if user.is_authenticated %}
+                                    <a href="/mypage" class="text-[#FF176A] hover:text-[#FF176A]">바로가기  →</a>
+                                    {% else %}
+                                    <a href="/login" class="text-[#FF176A] hover:text-[#FF176A]">바로가기  →</a>
+                                    {% endif %}
+                                   
                                 </div>
                             </div>
                             <div class="card p-0 w-[31%]">
                                 <div class="icon  bg-pink center flex-col py-3 h-[250px]">
                                     <img src="{% static 'images/homepage/main/icon2.png' %}" >
-                                    <b class="text-2xl font-bold mt-4 text-white">1 : 1 매칭</b>
+                                    <b class="text-2xl font-bold mt-4 text-white">자동 맞춤 매칭</b>
                                 </div>
                                 <div class="p-3 flex flex-col justify-between h-auto">
                                     <p class="text-lg">
-                                        내 정보를 바탕으로 가장 많은 키워드가
-                                        겹치는 친구를 찾아서 매칭해줘요!
+                                        내 정보를 바탕으로 키워드가 겹치는 친구를 찾아서 추천해줘요!
                                     </p>
+                                    {% if user.is_authenticated %}
                                     <a href="/mypage" class="text-[#FF176A] hover:text-[#FF176A]">바로가기  →</a>
+                                    {% else %}
+                                    <a href="/login" class="text-[#FF176A] hover:text-[#FF176A]">바로가기  →</a>
+                                    {% endif %}
                                 </div>
                             </div>
                             <div class="card p-0 w-[31%]">
@@ -172,35 +180,40 @@
                         <div class="friends-list w-full">
                             <div class="swiper friendsSwiper">
                                 <div class="swiper-wrapper">
-                                    {% for m in object_list %}
-                                    <div class="swiper-slide">
-                                        <div class="card p-0 mb-5">
-                                            <div class="h-[200px] overflow-hidden flex justify-center items-center">
-                                                {% if m.back_image %}
-                                                    <img class="card-img-top" src="{{ m.back_image.url }}" alt="default image">
-                                                {% else %}
-                                                    <img class="card-img-top" src="{% static 'images/profile/back.png' %}" alt="default image">
-                                                {% endif %}
-                                            </div>
-                                    
-                                            
-                                            <div class="card-body h-[200px]">
-                                              <h5 class="card-title flex  items-center"> 
-                                                {% if m.prof_image %}
-                                                    <img src="{{ m.prof_image.url }}" alt="프로필 사진" class="w-[50px] h-[50px] mr-3"> 
-                                                {% else %}
-                                                    <img class="card-img-top" src="{% static 'images/profile/prof.png' %}" alt="default image">
-                                                {% endif %}
-                                                {{ m.name }}
-                                            </h5>
-                                              <p class="card-text">{{ m.major_1 }} | {{ m.major_2 }}</p>
-                                              <span class="bg-pink rounded-2xl px-3 py-1 text-white break-keep inline-block" >#해쉬태그</span>
-                                              <span class="bg-pink rounded-2xl px-3 py-1 text-white break-keep inline-block" >#해쉬태그</span>
-                                              <span class="bg-pink rounded-2xl px-3 py-1 text-white break-keep inline-block" >#해쉬태그</span>
-                                           
-                                            </div>
-                                        </div>
-                                    </div>
+                                    {% for m in object_list %} 
+                                        {% if m != request.user and m.username != "admin" %}
+                                        <div class="swiper-slide">
+                                            <div class="card p-0 mb-5">
+                                                <div class="h-[200px] overflow-hidden flex justify-center items-center mb-2">
+                                                    {% if m.back_image %}
+                                                        <img class="card-img-top" src="{{ m.back_image.url }}" alt="default image">
+                                                    {% else %}
+                                                        <img class="card-img-top" src="{% static 'images/profile/back.png' %}" alt="default image">
+                                                    {% endif %}
+                                                </div>
+                                        
+                                                
+                                                <div class="card-body h-[230px]">
+                                                    <div class="flex  items-center">
+                                                        <div  class="w-[50px] h-[50px] mr-3 rounded-[50%] overflow-hidden">
+                                                            {% if m.prof_image %}
+                                                            <img src="{{ m.prof_image.url }}" alt="프로필 사진" class="w-full"> 
+                                                            {% else %}
+                                                            <img src="{% static 'images/profile/prof.png' %}" alt="default image" class="w-full">
+                                                            {% endif %}
+                                                        </div>
+                                                        <h5 class="card-title"> 
+                                                            {{ m.name }}
+                                                        </h5>
+                                                    </div>
+                                                    <p class="card-text">{{ m.major1 }} | {{ m.major2 }}</p>
+                                                    {% for t in m.tag.all %}
+                                                    <div class="bg-slate-100 rounded-2xl px-3 py-1 break-keep inline-block mt-1 mr-1 text-sm">#{{t.name}}</div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>  
+                                        </div>  
+                                        {% endif %}
                                     {% endfor %}
                                 </div>
                             </div>

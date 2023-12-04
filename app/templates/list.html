@@ -5,7 +5,7 @@
 {% block content %}
   <div class="flex justify-start items-start flex-wrap">
     {% for m in object_list %}
-      {% if m != request.user %}
+      {% if m != request.user and m.username != "admin" %}
         <div class="border-1 p-0 mb-5 w-[31%] rounded overflow-hidden m-[1%]">
           <div class="h-[200px] overflow-hidden flex justify-center items-center">
             {% if m.back_image %}
@@ -14,7 +14,7 @@
               <img class="card-img-top" src="{% static 'images/profile/back.png' %}" alt="default image">
             {% endif %}
           </div>
-          <div class="min-h-[300px] p-3">
+          <div class="min-h-[300px] p-3 flex flex-col">
             <h5 class="flex  items-center"> 
               <div class="w-[50px] h-[50px] mr-3 rounded-[50%] overflow-hidden">
                 {% if m.prof_image %}
@@ -26,16 +26,16 @@
               {{ m.nickname }}
             </h5>
             <p class="card-text">{{ m.major1 }} | {{ m.major2 }}</p>
-            {% for t in m.tag.all %}
-              <div class="bg-slate-100 rounded-2xl px-3 py-1 break-keep inline-block mt-1 mr-1 text-sm">#{{t.name}}</div>
-            {% endfor %}
             <div>
-              <button class="pink px-2 block mt-5 px-3">
+              {% for t in m.tag.all %}
+              <div class="bg-slate-100 rounded-2xl px-3 py-1 break-keep inline-block mt-1 mr-1 text-sm">#{{t.name}}</div>
+              {% endfor %}
+            </div>
+              <button class="pink px-2 block mt-auto px-3">
                 <a href="/add_friend/{{m.username}}/" class="text-white hover:text-white no-underline">
                   친구하기
                 </a>
               </button>
-            </div>
           </div>
         </div>
       {% endif %}
