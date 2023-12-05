@@ -25,7 +25,7 @@ a{
 label{
     min-width: 130px;
 }
-input, select,
+input, select, textarea,
 input[type='date']{
     background: #FFF;
     border: 2px solid #cacaca;
@@ -35,10 +35,13 @@ input[type='date']{
     min-width: 270px;
     padding: 0 10px !important;
 }
-input:focus, select:focus{
+input:focus, select:focus, textarea:focus{
     border-color: #FF176A ;
 }
-
+textarea{
+    height: 250px;
+    box-shadow: none;
+}
 
 form p{
     display: flex;
@@ -144,4 +147,29 @@ button.pink{
 .errorlist.nonfield li{
     font-size: 14px;
     color: #ff1717;
+}
+
+
+.post-list  {
+    width: 100%;
+    border: 1px solid lightgray;
+    border-collapse: collapse;
+}
+.post-list tr {
+    border-bottom: 1px solid lightgray  !important;
+}
+
+.post-list tbody tr:nth-child(odd){
+    background-color: #f4f4f4;
+}
+.post-list th, 
+.post-list td {
+    padding: 10px;
+    text-align: center;
+}
+
+.comment textarea{
+    height: 100px;
+    margin-top: 10px;
+    padding: 5px;
 }

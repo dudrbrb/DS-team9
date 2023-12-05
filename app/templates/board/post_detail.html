@@ -1,0 +1,71 @@
+{% extends 'module/base.html' %}
+
+{% block title %}게시물{% endblock %}
+{% block content %}
+<div>
+    <div class="mb-4 bg-light py-2 px-2 border-b-2">
+        <p class="flex justify-between mb-0 ">
+            <b class="text-lg">제목: {{post.title}}</b>
+            <span>
+                {{post.author}}
+                ({{post.create_at | date:"Y-m-d"}})
+
+                <span>
+                    <a href="/board/update_post/{{ post.pk }}" class="no-underline px-2 py-1  rounded bg-pink text-white ml-3">수정하기</a>
+                </span>
+            </span>
+        </p>
+    </div>
+
+
+    {% if post.image %}
+        <figure class="mb-4">
+            <img class="img-fluid rounded" src="{{ post.image.url }}"  />
+        </figure>
+    {% endif %}
+
+
+    <div>
+        <p class="text-base p-3">{{ post.content }}</p>
+    </div>
+
+    {% if post.file_upload %}
+        <a href="{{ post.file_upload.url }}" class="btn btn-outline-dark" role="button" download>Download</a>
+    {% endif %}
+
+    <div class="comment"> 
+        <!-- 댓글 폼 표시 -->
+        <b class="w-full bg-light py-2 border-t-2 border-b-2 block">댓글 작성</b>
+        <form method="post" action="{% url 'app:comment_create'  pk=post.pk  %}">
+            {% csrf_token %}
+            {{ comment_form.as_p }}
+            <button type="submit" class="bg-[#FF176A] text-white px-2">댓글 작성</button>
+        </form>
+    
+        
+        <!-- 댓글 목록 표시 -->
+        <b class="w-full bg-light py-2 border-t-2 border-b-2 block mt-3">댓글</b>
+        <ul class="pl-0">
+            {% for comment in comments  %}
+                <li class="flex border-b-[1px]  py-1">
+                    <b class="mr-2">{{ comment.author }}</b>
+                    <p class="m-0">{{ comment.content }}</p>
+                    <small class="ml-auto">
+                        {{ comment.create_at | date:"Y-m-d h:m" }}
+                        <form method="post" action="{% url 'app:delete_comment' comment.id %}" class="inline-block ml-1">
+                            {% csrf_token %}
+                            <button type="submit" class="shadow-none text-sm text-red-500">삭제</button>
+                        </form>
+                    </small>
+                </li>
+            {% endfor %}
+        </ul>
+
+    </div>
+
+
+
+</div>
+{% endblock %}
+
+

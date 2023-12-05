@@ -78,8 +78,8 @@ class User(AbstractUser):
     back_image = models.ImageField(upload_to='images/background/%Y/%m/%d/', blank=True)
     
     friends = models.TextField(blank=True)
-    liked = models.TextField(blank=True)
-    like = models.TextField(blank=True)
+    you_liked = models.TextField(blank=True)
+    my_like = models.TextField(blank=True)
 
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
@@ -89,13 +89,32 @@ class User(AbstractUser):
 class Post(models.Model):
     title = models.CharField(max_length=30)
     content = models.TextField()
-    tag = models.ManyToManyField(Tag, blank=True)
     author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
+    image = models.ImageField(upload_to='images/board/%Y/%m/%d/', blank=True)
+    file_upload = models.FileField(upload_to='blog/files/%Y/%m/%d/', blank=True)
+    
+    comments = models.ManyToManyField('Comment', related_name='comments_on_post', blank=True)
 
     def __str__(self):
         return f'[{self.pk}]{self.title} :: {self.author}'
 
     def get_absolute_url(self):
-        return f'/list/{self.pk}/'
+        return f'/board/{self.pk}/'
+
+
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments_on_post')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments_by_author')
+    content = models.TextField()
+    create_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.author}::{self.content}'
+
+    def get_absolute_url(self):
+        return f'{self.post.get_absolute_url()}#comment-{self.pk}'
+

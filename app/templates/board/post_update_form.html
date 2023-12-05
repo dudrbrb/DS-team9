@@ -1,0 +1,14 @@
+{% extends 'module/md_base.html' %}
+
+{% block title %}게시글 수정{% endblock %}
+
+{% block content %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table>
+        {{form}}
+    </table>
+    <button type="submit" class="pink px-5 my-4 text-white mx-auto block h-[50px]">작성하기</button>
+</form>
+
+{%  endblock   %}

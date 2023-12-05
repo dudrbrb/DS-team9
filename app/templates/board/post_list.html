@@ -1,0 +1,56 @@
+{% extends 'module/base.html' %}
+{% block title %}자유게시판{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    <a href="/board/create_post/" class="bg-pink text-white px-2 py-1 rounded no-underline right-7 top-[30px] block absolute">
+        새 글 작성하기
+    </a>
+{% endif %}
+
+<div class="mb-3">
+    <form class="flex " method="GET" action="{% url 'app:post_search' %}">
+        <div class="input-group">
+          <input type="text" class="form-control rounded m-0 mr-2" placeholder="검색" aria-label="검색" name="q" value="{{ query }}">
+          <button class="bg-[#FF176A] text-white shadow-none h-full px-3 mx-2 rounded" type="submit" id="button-addon2">검색</button>
+          {% if query %}
+            <a href="/board/post_list/" class="no-underline border-1 rounded shadow-none  px-3 h-full bg-blue-800 text-white pt-2">
+             초기화
+            </a>
+          {% endif %}
+        </div>
+      </form>
+
+
+
+  </div>
+
+  {% if post_list.exists %}
+    <table class="post-list">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>제목</th>
+          <th>작성 날짜</th>
+          <th>작성자</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in post_list %}
+          <tr>
+            <td>{{ p.pk }}</td>
+            <td>
+              <a href="{{ p.get_absolute_url }}" class="no-underline text-[#333]">
+                {{ p.title }}
+              </a>
+            </td>
+            <td>{{ p.create_at | date:"Y-m-d" }}</td>
+            <td>{{ p.author }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p class="text-pink-500 text-2xl text-center mt-20">게시물이 없습니다</p>
+  {% endif %}
+{% endblock %}

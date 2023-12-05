@@ -6,8 +6,82 @@
 {% block content %}
 
 <ul role="list" class="divide-y divide-gray-100">
-    {%if friends_users %}
-    {% for f in friends_users  %}
+  {%if friends_users or my_like_users or you_liked_users %}
+    {% if my_like_users %}
+    {% for f in my_like_users %}
+  
+      <li class="flex justify-between gap-x-6 border-1 p-3 mb-2 hover:bg-gray-50 rounded">
+        <div class="flex min-w-0 gap-x-4 w-full">
+          <img class="h-[100px] w-[100px] flex-none rounded-full bg-gray-50" src="{{ f.prof_image.url }}">
+
+          <div class="flex-auto w-full">
+            <b class="text-lg text-gray-900 mb-1 block w-full flex justify-between">
+              {{f.name}}
+              <div>
+                <a class="inline-block ml-auto bg-gray-100 no-underline text-[#333] hover:bg-gray-200 px-2 border-2 rounded">수락 대기 중</a>
+                <a href="/remove_my_like/{{f.username}}" class="inline-block ml-auto bg-gray-100 no-underline text-[#333] hover:bg-gray-200 px-2 border-2 rounded bg-red-500 hover:bg-red-500 text-white hover:text-white border-red-500">삭제</a>
+              </div>
+            </b>
+            <p class="mb-2">
+              {{f.major1}} |  {{f.major2}} <br>
+              {{f.birth | date:"Y-m-d" }}<br>
+              
+            </p>
+            <div>
+
+              {% if f.tag.exists %}
+                {% for tag in f.tag.all %}
+                <span class="bg-pink rounded-2xl px-3 py-1 text-white break-keep inline-block mt-1 mr-1">{{tag}}</span>
+                {% endfor %}
+              {% endif %}
+            </div>
+     
+          </div>
+        </div>
+   
+      </li>
+    {% endfor %}
+    {% endif %}
+
+    {% if you_liked_users %}
+    {% for f in you_liked_users %}
+  
+      <li class="flex justify-between gap-x-6 border-1 p-3 mb-2 hover:bg-gray-50 rounded">
+        <div class="flex min-w-0 gap-x-4 w-full">
+          <img class="h-[100px] w-[100px] flex-none rounded-full bg-gray-50" src="{{ f.prof_image.url }}">
+
+          <div class="flex-auto w-full">
+            <b class="text-lg text-gray-900 mb-1 block w-full flex justify-between">
+              {{f.name}}
+              <div>
+                <a href="/add_friend/{{f.username}}" class="inline-block ml-auto bg-gray-100 no-underline text-[#333] hover:bg-red-500 px-2 border-2 rounded ml-auto bg-red-500 text-white border-0">수락</a>
+                <a href="/remove_you_liked/{{f.username}}" class="inline-block ml-auto no-underline px-2 border-2 rounded bg-blue-700 text-white border-0">거절</a>
+              </div>
+            </b>
+            <p class="mb-2">
+              {{f.major1}} |  {{f.major2}} <br>
+              {{f.birth | date:"Y-m-d" }}<br>
+              
+            </p>
+            <div>
+
+              {% if f.tag.exists %}
+                {% for tag in f.tag.all %}
+                <span class="bg-pink rounded-2xl px-3 py-1 text-white break-keep inline-block mt-1 mr-1">{{tag}}</span>
+                {% endfor %}
+              {% endif %}
+            </div>
+     
+          </div>
+        </div>
+   
+      </li>
+
+    {% endfor %}
+    {% endif %}
+
+    {% if friends_users %}
+    {% for f in friends_users %}
   
       <li class="flex justify-between gap-x-6 border-1 p-3 mb-2 hover:bg-gray-50 rounded">
         <div class="flex min-w-0 gap-x-4 w-full">
@@ -36,15 +110,17 @@
         </div>
    
       </li>
+
     {% endfor %}
-    {% else %}
-    <p class="text-pink-500 text-2xl text-center mt-20">
-      아직 매칭 된 친구가 없습니다<br>
-      <a href="/list" class="underline text-sm text-pink-500 mt-5">친구들 만나러 가기</a>
-    </p>
     {% endif %}
 
-  
+    {% else %}
+     <p class="text-pink-500 text-2xl text-center mt-20">
+      아직 매칭 된 친구가 없습니다<br>
+      <a href="/list" class="underline text-sm text-pink-500 mt-5">친구들 만나러 가기</a>
+     </p>
+    {% endif %}
+
   </ul>
 
 

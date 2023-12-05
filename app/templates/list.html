@@ -1,8 +1,26 @@
+
 {% extends 'module/base.html' %}
 {% load static %}
+
 {% block title %}공개구벗{% endblock %}
 
 {% block content %}
+  <div class="mb-3 h-10">
+    <form class="flex " method="GET" action="{% url 'app:list_search' %}">
+      <div class="input-group">
+        <input type="text" class="form-control rounded m-0 mr-2" placeholder="검색" aria-label="검색" name="q" value="{{ query }}">
+        <button class="bg-[#FF176A] text-white shadow-none h-full px-3 mx-2 rounded" type="submit" id="button-addon2">검색</button>
+        {% if query %}
+          <a href="/list" class=" no-underline">
+            <button class="border-1 rounded shadow-none  px-3 h-full bg-blue-800 text-white">
+              초기화
+            </button>
+          </a>
+        {% endif %}
+      </div>
+    </form>
+  </div>
+
   <div class="flex justify-start items-start flex-wrap">
     {% for m in object_list %}
       {% if m != request.user and m.username != "admin" %}
@@ -28,17 +46,23 @@
             <p class="card-text">{{ m.major1 }} | {{ m.major2 }}</p>
             <div>
               {% for t in m.tag.all %}
-              <div class="bg-slate-100 rounded-2xl px-3 py-1 break-keep inline-block mt-1 mr-1 text-sm">#{{t.name}}</div>
+                <div class="bg-slate-100 rounded-2xl px-3 py-1 break-keep inline-block mt-1 mr-1 text-sm">#{{t.name}}</div>
               {% endfor %}
             </div>
-              <button class="pink px-2 block mt-auto px-3">
-                <a href="/add_friend/{{m.username}}/" class="text-white hover:text-white no-underline">
-                  친구하기
-                </a>
-              </button>
+            <button class="pink px-2 block mt-auto px-3">
+              <a href="/add_my_like/{{m.username}}/" class="text-white hover:text-white no-underline">
+                친구요청하기
+              </a>
+            </button>
           </div>
         </div>
       {% endif %}
     {% endfor %}
+
+    {% if not object_list and not query %}
+      <p>공개된 프로필이 없습니다.</p>
+    {% elif not object_list %}
+      <p>검색 결과가 없습니다.</p>
+    {% endif %}
   </div>
 {% endblock %}

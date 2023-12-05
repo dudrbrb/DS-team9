@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm, UsernameField
 from django.contrib.auth import get_user_model
-from .models import Tag
+from .models import Tag, Post, Comment
 
 
 class CustomAuthenticationForm(AuthenticationForm):
@@ -161,3 +161,33 @@ class CustomUserChangeForm(UserChangeForm):
         for field_name in ['password', 'password1', 'password2', 'email']:
             if field_name in self.fields:
                 del self.fields[field_name]
+
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['title', 'image', 'content', 'file_upload']
+        labels = {
+            'title': '제목',
+            'image': '이미지',
+            'content': '내용',
+            'file_upload': '파일 업로드',
+        }
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.label_suffix = ""
+
+class CommentForm(forms.ModelForm):
+    content = forms.CharField(
+        label="",
+        widget=forms.Textarea()  # 텍스트 필드의 속성 설정
+    )
+
+    class Meta:
+        model = Comment
+        fields = ['content']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.label_suffix = ""
